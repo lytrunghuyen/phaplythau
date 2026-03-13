@@ -6,30 +6,27 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
+rel="stylesheet">
 
 <style>
-  
-thead th{
-position:sticky;
-top:0;
-z-index:5;
-}
-  
+
 body{
 font-family:'Montserrat',sans-serif;
 margin:0;
 display:flex;
 background:#f8f9fb;
+color:#374151;
 }
 
 /* SIDEBAR */
 
 .sidebar{
 width:260px;
-background:#f2f3f5;
+background:#f3f4f6;
 height:100vh;
 padding:25px;
 border-right:1px solid #e5e7eb;
@@ -41,7 +38,6 @@ top:0;
 margin-top:0;
 font-size:20px;
 font-weight:600;
-color:#374151;
 margin-bottom:25px;
 }
 
@@ -51,28 +47,17 @@ align-items:center;
 gap:12px;
 padding:12px 14px;
 margin-bottom:6px;
-color:#374151;
 text-decoration:none;
-font-size:17px;
+font-size:16px;
 border-radius:10px;
-font-weight:500;
-}
-
-.sidebar a i{
-width:20px;
-text-align:center;
+color:#374151;
+transition:.2s;
 }
 
 .sidebar a:hover{
 background:#ede9fe;
 color:#7c3aed;
-text-decoration:none;
-}
-
-.sidebar a.active{
-background:#e9d5ff;
-color:#7c3aed;
-font-weight:600;
+transform:translateX(2px);
 }
 
 /* CONTENT */
@@ -80,13 +65,25 @@ font-weight:600;
 .content{
 flex:1;
 padding:35px;
-overflow-x:auto;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.header h1{
+font-size:24px;
+margin:0;
 }
 
 /* SEARCH */
 
 .searchBox{
-margin-bottom:15px;
 position:relative;
 }
 
@@ -96,39 +93,21 @@ left:12px;
 top:50%;
 transform:translateY(-50%);
 color:#9ca3af;
-font-size:14px;
-transition:color .25s ease;
 }
 
 .searchBox input{
-width:300px;
 padding:10px 12px 10px 34px;
-border:1px solid #ddd;
 border-radius:8px;
+border:1px solid #ddd;
 font-size:14px;
-transition:all .25s ease;
-background:white;
+width:280px;
+transition:.2s;
 }
-
-/* hover */
-
-.searchBox input:hover{
-border-color:#c4b5fd;
-}
-
-/* focus */
 
 .searchBox input:focus{
 outline:none;
 border-color:#7c3aed;
 box-shadow:0 0 0 3px rgba(124,58,237,0.15);
-}
-
-/* icon */
-
-.searchBox input:focus + i,
-.searchBox:focus-within i{
-color:#7c3aed;
 }
 
 /* TABLE */
@@ -137,62 +116,55 @@ table{
 width:100%;
 border-collapse:collapse;
 background:white;
-table-layout:auto;
-min-width:700px;
+border-radius:10px;
+overflow:hidden;
 }
 
-th,td{
-border-bottom:1px solid #eee;
-padding:14px;
-text-align:left;
-vertical-align:top;
-overflow-wrap:break-word;
-word-break:normal;
-}
-
-th{
+thead th{
 background:#6e35e8;
 color:white;
+padding:14px;
+text-align:left;
+position:sticky;
+top:0;
+z-index:5;
 }
 
-/* COLUMN WIDTH */
-
-th:nth-child(1), td:nth-child(1){
-width:140px;
+td{
+padding:14px;
+border-bottom:1px solid #eee;
 }
-
-th:nth-child(2), td:nth-child(2){
-width:auto;
-}
-
-th:nth-child(3), td:nth-child(3){
-width:140px;
-}
-
-th:nth-child(4), td:nth-child(4){
-width:140px;
-text-align:center;
-}
-
-a{
-color:#6e35e8;
-text-decoration:none;
-font-weight:500;
-}
-
-a:hover{
-text-decoration:underline;
-}
-
-/* HOVER ROW EFFECT */
 
 tbody tr{
 cursor:pointer;
-transition:background .2s ease;
+transition:.15s;
 }
 
 tbody tr:hover{
-background:#f3f4f6;
+background:#f9fafb;
+}
+
+/* BADGE */
+
+.badge{
+font-size:11px;
+padding:3px 7px;
+border-radius:5px;
+color:white;
+margin-right:6px;
+}
+
+.badge.luat{background:#ef4444;}
+.badge.nghidinh{background:#f59e0b;}
+.badge.thongtu{background:#3b82f6;}
+.badge.huongdan{background:#10b981;}
+
+/* MARK SEARCH */
+
+mark{
+background:#fde68a;
+padding:1px 3px;
+border-radius:3px;
 }
 
 /* PAGINATION */
@@ -207,8 +179,8 @@ flex-wrap:wrap;
 .page-btn{
 padding:6px 10px;
 border:1px solid #ddd;
-cursor:pointer;
 border-radius:6px;
+cursor:pointer;
 background:white;
 }
 
@@ -219,7 +191,6 @@ border:none;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -229,39 +200,40 @@ border:none;
 <h2>📚 Văn bản</h2>
 
 <a href="#" onclick="filterDocs('all')">
-<i class="fa-solid fa-folder"></i>
-Trang chủ
+<i class="fa-solid fa-folder"></i>Trang chủ
 </a>
 
 <a href="#" onclick="filterDocs('luat')">
-<i class="fa-solid fa-scale-balanced"></i>
-Luật
+<i class="fa-solid fa-scale-balanced"></i>Luật
 </a>
 
 <a href="#" onclick="filterDocs('nghidinh')">
-<i class="fa-solid fa-file-lines"></i>
-Nghị định
+<i class="fa-solid fa-file-lines"></i>Nghị định
 </a>
 
 <a href="#" onclick="filterDocs('thongtu')">
-<i class="fa-solid fa-file"></i>
-Thông tư
+<i class="fa-solid fa-file"></i>Thông tư
 </a>
 
 <a href="#" onclick="filterDocs('huongdan')">
-<i class="fa-solid fa-bookmark"></i>
-Hướng dẫn
+<i class="fa-solid fa-bookmark"></i>Hướng dẫn
 </a>
 
 </div>
 
 <div class="content">
 
-<h1>Danh sách văn bản</h1>
+<div class="header">
+
+<h1 id="title">Danh sách văn bản</h1>
 
 <div class="searchBox">
 <i class="fa-solid fa-magnifying-glass"></i>
-<input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
+<input type="text"
+placeholder="Tìm số hoặc tên văn bản..."
+onkeyup="searchDocs(this.value)">
+</div>
+
 </div>
 
 <table>
@@ -271,12 +243,11 @@ Hướng dẫn
 <th>Số ký hiệu</th>
 <th>Trích yếu</th>
 <th>Ngày ban hành</th>
-<th>File Word</th>
+<th>Word</th>
 </tr>
 </thead>
 
-<tbody id="docTable">
-</tbody>
+<tbody id="docTable"></tbody>
 
 </table>
 
@@ -291,11 +262,9 @@ let filteredDocs=[];
 let currentPage=1;
 const rowsPerPage=25;
 
-/* CHUYỂN DATE */
-
 function parseDate(dateStr){
-let parts=dateStr.split("/");
-return new Date(parts[2],parts[1]-1,parts[0]);
+let p=dateStr.split("/");
+return new Date(p[2],p[1]-1,p[0]);
 }
 
 /* LOAD DATA */
@@ -311,7 +280,19 @@ renderTable();
 
 });
 
-/* RENDER TABLE */
+/* HIGHLIGHT SEARCH */
+
+function highlight(text,keyword){
+
+if(!keyword) return text;
+
+let reg=new RegExp(keyword,"gi");
+
+return text.replace(reg,(m)=>"<mark>"+m+"</mark>");
+
+}
+
+/* RENDER */
 
 function renderTable(){
 
@@ -320,16 +301,26 @@ let end=start+rowsPerPage;
 
 let rows=filteredDocs.slice(start,end);
 
+let keyword=document.querySelector(".searchBox input").value.toLowerCase();
+
 let html="";
 
 rows.forEach(doc=>{
 
+let badge=doc.type?`<span class="badge ${doc.type}">${doc.type}</span>`:"";
+
+let title=highlight(doc.ten || "",keyword);
+
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}')">
 <td>${doc.so || ""}</td>
-<td>${doc.ten || ""}</td>
+<td>${badge}${title}</td>
 <td>${doc.ngay || ""}</td>
-<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+<td>
+${doc.linkword?`<a href="${doc.linkword}" target="_blank">
+<i class="fa-solid fa-eye"></i> Xem
+</a>`:""}
+</td>
 </tr>
 `;
 
@@ -337,12 +328,11 @@ html+=`
 
 document.getElementById("docTable").innerHTML=html;
 
+document.getElementById("title").innerText=
+"Danh sách văn bản ("+filteredDocs.length+" văn bản)";
+
 renderPagination();
 
-}
-
-function openPDF(url){
-window.open(url,"_blank");
 }
 
 /* PAGINATION */
@@ -355,7 +345,8 @@ let html="";
 
 for(let i=1;i<=totalPages;i++){
 
-html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
+html+=`<div class="page-btn ${i===currentPage?'active':''}"
+onclick="changePage(${i})">${i}</div>`;
 
 }
 
@@ -363,9 +354,9 @@ document.getElementById("pagination").innerHTML=html;
 
 }
 
-function changePage(page){
+function changePage(p){
 
-currentPage=page;
+currentPage=p;
 renderTable();
 
 }
@@ -374,15 +365,9 @@ renderTable();
 
 function filterDocs(type){
 
-if(type==="all"){
+if(type==="all") filteredDocs=allDocs;
 
-filteredDocs=allDocs;
-
-}else{
-
-filteredDocs=allDocs.filter(doc=>doc.type===type);
-
-}
+else filteredDocs=allDocs.filter(d=>d.type===type);
 
 currentPage=1;
 
@@ -392,7 +377,13 @@ renderTable();
 
 /* SEARCH */
 
+let timer;
+
 function searchDocs(keyword){
+
+clearTimeout(timer);
+
+timer=setTimeout(()=>{
 
 keyword=keyword.toLowerCase();
 
@@ -406,6 +397,16 @@ filteredDocs=allDocs.filter(doc=>
 currentPage=1;
 
 renderTable();
+
+},200);
+
+}
+
+/* OPEN PDF */
+
+function openPDF(url){
+
+window.open(url,"_blank");
 
 }
 
