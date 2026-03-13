@@ -206,6 +206,54 @@ color:white;
 border:none;
 }
 
+/* PDF POPUP */
+
+.pdf-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:999;
+align-items:center;
+justify-content:center;
+}
+
+.pdf-box{
+width:90%;
+height:90%;
+background:white;
+border-radius:10px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+}
+
+.pdf-header{
+padding:10px 15px;
+background:#6e35e8;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.pdf-header button{
+background:none;
+border:none;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+#pdfFrame{
+flex:1;
+border:none;
+width:100%;
+}
+
 </style>
 
 </head>
@@ -273,6 +321,21 @@ Hướng dẫn
 
 </div>
 
+<!-- PDF POPUP -->
+
+<div id="pdfModal" class="pdf-modal">
+<div class="pdf-box">
+
+<div class="pdf-header">
+<span>Xem văn bản</span>
+<button onclick="closePDF()">✕</button>
+</div>
+
+<iframe id="pdfFrame"></iframe>
+
+</div>
+</div>
+
 <script>
 
 let allDocs=[];
@@ -318,7 +381,7 @@ html+=`
 <td>${doc.so || ""}</td>
 <td>${doc.ten || ""}</td>
 <td>${doc.ngay || ""}</td>
-<td>${doc.linkpdf ? `<a href="${doc.linkpdf}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+<td>${doc.linkpdf ? `<a href="#" onclick="openPDF('${doc.linkpdf}')"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 <td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 </tr>
 `;
@@ -393,6 +456,25 @@ currentPage=1;
 
 renderTable();
 
+}
+
+/* PDF FUNCTIONS */
+
+function openPDF(url){
+document.getElementById("pdfFrame").src=url;
+document.getElementById("pdfModal").style.display="flex";
+}
+
+function closePDF(){
+document.getElementById("pdfFrame").src="";
+document.getElementById("pdfModal").style.display="none";
+}
+
+window.onclick=function(e){
+let modal=document.getElementById("pdfModal");
+if(e.target==modal){
+closePDF();
+}
 }
 
 </script>
