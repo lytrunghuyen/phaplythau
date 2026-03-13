@@ -47,6 +47,7 @@ color:#374151;
 text-decoration:none;
 font-size:17px;
 border-radius:10px;
+font-weight:500;
 }
 
 .sidebar a i{
@@ -134,16 +135,14 @@ width:140px;
 text-align:center;
 }
 
-/* LINK WORD */
-
-.word-link{
+a{
 color:#6e35e8;
-text-decoration:underline;
+text-decoration:none;
 font-weight:500;
 }
 
-.word-link i{
-margin-right:6px;
+a:hover{
+text-decoration:underline;
 }
 
 /* PAGINATION */
@@ -274,7 +273,7 @@ html+=`
 <td>${doc.ten || ""}</td>
 <td>${doc.ngay || ""}</td>
 <td>${doc.linkpdf ? `<a href="${doc.linkpdf}" target="_blank">Xem PDF</a>` : ""}</td>
-<td>${doc.linkword ? `<a class="word-link" href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i>Xem</a>` : ""}</td>
+<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank">Xem Word</a>` : ""}</td>
 </tr>
 `;
 
