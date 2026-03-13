@@ -164,11 +164,6 @@ width:140px;
 }
 
 th:nth-child(4), td:nth-child(4){
-width:160px;
-text-align:center;
-}
-
-th:nth-child(5), td:nth-child(5){
 width:140px;
 text-align:center;
 }
@@ -181,6 +176,17 @@ font-weight:500;
 
 a:hover{
 text-decoration:underline;
+}
+
+/* HOVER ROW EFFECT */
+
+tbody tr{
+cursor:pointer;
+transition:background .2s ease;
+}
+
+tbody tr:hover{
+background:#f3f4f6;
 }
 
 /* PAGINATION */
@@ -259,7 +265,6 @@ Hướng dẫn
 <th>Số ký hiệu</th>
 <th>Trích yếu</th>
 <th>Ngày ban hành</th>
-<th>Văn bản gốc</th>
 <th>File Word</th>
 </tr>
 </thead>
@@ -314,11 +319,10 @@ let html="";
 rows.forEach(doc=>{
 
 html+=`
-<tr>
+<tr onclick="openPDF('${doc.linkpdf}')">
 <td>${doc.so || ""}</td>
 <td>${doc.ten || ""}</td>
 <td>${doc.ngay || ""}</td>
-<td>${doc.linkpdf ? `<a href="${doc.linkpdf}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 <td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 </tr>
 `;
@@ -329,6 +333,10 @@ document.getElementById("docTable").innerHTML=html;
 
 renderPagination();
 
+}
+
+function openPDF(url){
+window.open(url,"_blank");
 }
 
 /* PAGINATION */
