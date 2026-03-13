@@ -1,504 +1,424 @@
 <!DOCTYPE html>
-
 <html>
 <head>
+    <script data-goatcounter="https://lytrunghuyen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <meta charset="utf-8">
+    <title>Thư viện văn bản đấu thầu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
-<script data-goatcounter="https://lytrunghuyen.goatcounter.com/count"
-async src="//gc.zgo.at/count.js"></script>
+    <style>
+        thead th {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
 
-<meta charset="utf-8">
-<title>Thư viện văn bản đấu thầu</title>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            display: flex;
+            background: #f8f9fb;
+        }
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+        /* VIEW COUNTER */
+        .viewCounter {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            font-size: 14px;
+            color: #6b7280;
+            background: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.12);
+            border: 1px solid rgba(124, 58, 237, 0.08);
+            z-index: 999;
+        }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: #f2f3f5;
+            height: 100vh;
+            padding: 25px;
+            border-right: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 25px;
+        }
 
-<style>
-  
-thead th{
-position:sticky;
-top:0;
-z-index:5;
-}
-  
-body{
-font-family:'Montserrat',sans-serif;
-margin:0;
-display:flex;
-background:#f8f9fb;
-}
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            color: #374151;
+            text-decoration: none;
+            font-size: 17px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
 
-/* VIEW COUNTER */
+        .sidebar a i {
+            width: 20px;
+            text-align: center;
+        }
 
-.viewCounter{
-position:fixed;
-right:18px;
-bottom:18px;
-font-size:14px;
-color:#6b7280;
-background:white;
-padding:8px 14px;
-border-radius:8px;
-box-shadow:0 2px 8px rgba(124,58,237,0.12);
-border:1px solid rgba(124,58,237,0.08);
-z-index:999;
-}
+        .sidebar a:hover {
+            background: #ede9fe;
+            color: #7c3aed;
+            text-decoration: none;
+        }
 
-/* SIDEBAR */
+        .sidebar a.active {
+            background: #e9d5ff;
+            color: #7c3aed;
+            font-weight: 600;
+        }
 
-.sidebar{
-width:260px;
-background:#f2f3f5;
-height:100vh;
-padding:25px;
-border-right:1px solid #e5e7eb;
-position:sticky;
-top:0;
-}
+        /* CONTENT */
+        .content {
+            flex: 1;
+            padding: 35px;
+            overflow-x: auto;
+        }
 
-.sidebar h2{
-margin-top:0;
-font-size:20px;
-font-weight:600;
-color:#374151;
-margin-bottom:25px;
-}
+        /* SEARCH */
+        .searchBox {
+            margin-bottom: 15px;
+            position: relative;
+        }
 
-.sidebar a{
-display:flex;
-align-items:center;
-gap:12px;
-padding:12px 14px;
-margin-bottom:6px;
-color:#374151;
-text-decoration:none;
-font-size:17px;
-border-radius:10px;
-font-weight:500;
-}
+        .searchBox i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 14px;
+            transition: color .25s ease;
+        }
 
-.sidebar a i{
-width:20px;
-text-align:center;
-}
+        .searchBox input {
+            width: 300px;
+            padding: 10px 12px 10px 34px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all .25s ease;
+            background: white;
+        }
 
-.sidebar a:hover{
-background:#ede9fe;
-color:#7c3aed;
-text-decoration:none;
-}
+        .searchBox input:hover {
+            border-color: #c4b5fd;
+        }
 
-.sidebar a.active{
-background:#e9d5ff;
-color:#7c3aed;
-font-weight:600;
-}
+        .searchBox input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+        }
 
-/* CONTENT */
+        .searchBox input:focus + i,
+        .searchBox:focus-within i {
+            color: #7c3aed;
+        }
 
-.content{
-flex:1;
-padding:35px;
-overflow-x:auto;
-}
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            table-layout: auto;
+            min-width: 900px;
+        }
 
-/* SEARCH */
+        th, td {
+            border-bottom: 1px solid #eee;
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+            overflow-wrap: break-word;
+            word-break: normal;
+        }
 
-.searchBox{
-margin-bottom:15px;
-position:relative;
-}
+        th {
+            background: #6e35e8;
+            color: white;
+        }
 
-.searchBox i{
-position:absolute;
-left:12px;
-top:50%;
-transform:translateY(-50%);
-color:#9ca3af;
-font-size:14px;
-transition:color .25s ease;
-}
+        /* COLUMN WIDTH */
+        th:nth-child(1), td:nth-child(1) { width: 140px; }
+        th:nth-child(2), td:nth-child(2) { width: auto; }
+        th:nth-child(3), td:nth-child(3) { width: 140px; }
+        th:nth-child(4), td:nth-child(4) { width: 150px; }
+        th:nth-child(5), td:nth-child(5) { width: 150px; }
+        th:nth-child(6), td:nth-child(6) { width: 120px; text-align: center; }
+        th:nth-child(7), td:nth-child(7) { width: 120px; text-align: center; }
 
-.searchBox input{
-width:300px;
-padding:10px 12px 10px 34px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:14px;
-transition:all .25s ease;
-background:white;
-}
+        a {
+            color: #6e35e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-.searchBox input:hover{
-border-color:#c4b5fd;
-}
+        a:hover {
+            text-decoration: underline;
+        }
 
-.searchBox input:focus{
-outline:none;
-border-color:#7c3aed;
-box-shadow:0 0 0 3px rgba(124,58,237,0.15);
-}
+        /* HOVER ROW EFFECT */
+        tbody tr {
+            cursor: pointer;
+            transition: background .2s ease;
+        }
 
-.searchBox input:focus + i,
-.searchBox:focus-within i{
-color:#7c3aed;
-}
+        tbody tr:hover {
+            background: #f3f4f6;
+        }
 
-/* TABLE */
+        tbody tr:hover td:nth-child(1),
+        tbody tr:hover td:nth-child(2),
+        tbody tr:hover td:nth-child(3),
+        tbody tr:hover td:nth-child(4) {
+            color: #6e35e8;
+        }
 
-table{
-width:100%;
-border-collapse:collapse;
-background:white;
-table-layout:auto;
-min-width:900px;
-}
+        /* PAGINATION */
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
 
-th,td{
-border-bottom:1px solid #eee;
-padding:14px;
-text-align:left;
-vertical-align:top;
-overflow-wrap:break-word;
-word-break:normal;
-}
+        .page-btn {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 6px;
+            background: white;
+        }
 
-th{
-background:#6e35e8;
-color:white;
-}
+        .page-btn.active {
+            background: #6e35e8;
+            color: white;
+            border: none;
+        }
 
-/* COLUMN WIDTH */
+        /* STATUS & TOOLTIP */
+        .status-ok {
+            background: #22c55e;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 500;
+            display: inline-block;
+        }
 
-th:nth-child(1), td:nth-child(1){
-width:140px;
-}
+        .status-x {
+            background: #ef4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 500;
+            display: inline-block;
+            position: relative;
+        }
 
-th:nth-child(2), td:nth-child(2){
-width:auto;
-}
+        /* TOOLTIP POPUP */
+        .status-x:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #374151;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            z-index: 99;
+            width: 200px;
+            white-space: normal;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: center;
+            line-height: 1.4;
+        }
 
-th:nth-child(3), td:nth-child(3){
-width:140px;
-}
+        .status-x:hover::before {
+            content: "";
+            position: absolute;
+            bottom: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #374151 transparent transparent transparent;
+            z-index: 99;
+        }
 
-th:nth-child(4), td:nth-child(4){
-width:150px;
-}
-
-th:nth-child(5), td:nth-child(5){
-width:150px;
-}
-
-th:nth-child(6), td:nth-child(6){
-width:120px;
-text-align:center;
-}
-
-th:nth-child(7), td:nth-child(7){
-width:120px;
-text-align:center;
-}
-
-a{
-color:#6e35e8;
-text-decoration:none;
-font-weight:500;
-}
-
-a:hover{
-text-decoration:underline;
-}
-
-/* HOVER ROW EFFECT */
-
-tbody tr{
-cursor:pointer;
-transition:background .2s ease;
-}
-
-tbody tr:hover{
-background:#f3f4f6;
-}
-
-tbody tr:hover td:nth-child(1),
-tbody tr:hover td:nth-child(2),
-tbody tr:hover td:nth-child(3),
-tbody tr:hover td:nth-child(4){
-color:#6e35e8;
-}
-
-/* PAGINATION */
-
-.pagination{
-margin-top:20px;
-display:flex;
-gap:6px;
-flex-wrap:wrap;
-}
-
-.page-btn{
-padding:6px 10px;
-border:1px solid #ddd;
-cursor:pointer;
-border-radius:6px;
-background:white;
-}
-
-.page-btn.active{
-background:#6e35e8;
-color:white;
-border:none;
-}
-
-/* STATUS */
-
-.status-ok{
-background:#22c55e;
-color:white;
-padding:4px 12px;
-border-radius:999px;
-font-size:12.5px;
-font-weight:500;
-display:inline-block;
-}
-
-.status-x{
-background:#ef4444;
-color:white;
-padding:4px 12px;
-border-radius:999px;
-font-size:12.5px;
-font-weight:500;
-display:inline-block;
-}
-
-</style>
-
+    </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-
-<h2>📚 Pháp lý đấu thầu</h2>
-
-<a href="#" onclick="filterDocs('all')">
-<i class="fa-solid fa-folder"></i>
-Trang chủ
-</a>
-
-<a href="#" onclick="filterDocs('luat')">
-<i class="fa-solid fa-scale-balanced"></i>
-Luật
-</a>
-
-<a href="#" onclick="filterDocs('nghidinh')">
-<i class="fa-solid fa-file-lines"></i>
-Nghị định
-</a>
-
-<a href="#" onclick="filterDocs('thongtu')">
-<i class="fa-solid fa-file"></i>
-Thông tư
-</a>
-
-<a href="#" onclick="filterDocs('huongdan')">
-<i class="fa-solid fa-bookmark"></i>
-Hướng dẫn
-</a>
-
-</div>
-
-<div class="content">
-
-<h1>Danh sách văn bản</h1>
-
-<div class="searchBox">
-<i class="fa-solid fa-magnifying-glass"></i>
-<input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>Số ký hiệu</th>
-<th>Trích yếu</th>
-<th>Ngày ban hành</th>
-<th>Ngày có hiệu lực</th>
-<th>Trạng thái</th>
-<th>File Word</th>
-<th>Tệp khác</th>
-</tr>
-</thead>
-
-<tbody id="docTable">
-</tbody>
-
-</table>
-
-<div class="pagination" id="pagination"></div>
-
-</div>
-
-<div class="viewCounter">
-<i class="fa-solid fa-eye"></i>
-<span id="visitor-count">0</span> lượt truy cập
-</div>
-
-<script>
-
-let allDocs=[];
-let filteredDocs=[];
-let currentPage=1;
-const rowsPerPage=25;
-
-function parseDate(dateStr){
-let parts=dateStr.split("/");
-return new Date(parts[2],parts[1]-1,parts[0]);
-}
-
-fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
-.then(res=>res.json())
-.then(data=>{
-
-allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
-filteredDocs=allDocs;
-
-renderTable();
-
-});
-
-function renderTable(){
-
-let start=(currentPage-1)*rowsPerPage;
-let end=start+rowsPerPage;
-
-let rows=filteredDocs.slice(start,end);
-
-let html="";
-
-rows.forEach(doc=>{
-
-let status="";
-
-if(doc.trangthai==="OK"){
-status=`<span class="status-ok">Còn hiệu lực</span>`;
-}
-else if(doc.trangthai==="X"){
-status=`<span class="status-x">Hết hiệu lực</span>`;
-}
-
-html+=`
-<tr onclick="openPDF('${doc.linkpdf}')">
-<td>${doc.so || ""}</td>
-<td>${doc.ten || ""}</td>
-<td>${doc.ngay || ""}</td>
-<td>${doc.hieuluc || ""}</td>
-<td>${status}</td>
-<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
-<td>${doc.linkkhac ? `<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
-</tr>
-`;
-
-});
-
-document.getElementById("docTable").innerHTML=html;
-
-renderPagination();
-
-}
-
-function openPDF(url){
-if(url) window.open(url,"_blank");
-}
-
-function renderPagination(){
-
-let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
-
-let html="";
-
-for(let i=1;i<=totalPages;i++){
-
-html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
-
-}
-
-document.getElementById("pagination").innerHTML=html;
-
-}
-
-function changePage(page){
-
-currentPage=page;
-renderTable();
-
-}
-
-function filterDocs(type){
-
-if(type==="all"){
-
-filteredDocs=allDocs;
-
-}else{
-
-filteredDocs=allDocs.filter(doc=>doc.type===type);
-
-}
-
-currentPage=1;
-
-renderTable();
-
-}
-
-function searchDocs(keyword){
-
-keyword=keyword.toLowerCase();
-
-filteredDocs=allDocs.filter(doc=>
-
-(doc.so && doc.so.toLowerCase().includes(keyword)) ||
-(doc.ten && doc.ten.toLowerCase().includes(keyword))
-
-);
-
-currentPage=1;
-
-renderTable();
-
-}
-
-window.addEventListener("load", function() {
-
-const code = 'lytrunghuyen'; 
-const url = `https://${code}.goatcounter.com/counter/TOTAL.json`;
-
-fetch(url)
-.then(response => response.json())
-.then(data => {
-
-let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
-let displayViews = actualViews * 3; 
-
-document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
-
-})
-.catch(err => {
-
-console.error("Lỗi khi lấy lượt xem:", err);
-document.getElementById("visitor-count").innerText = "---";
-
-});
-
-});
-
-</script>
-
+    <div class="sidebar">
+        <h2>📚 Pháp lý đấu thầu</h2>
+        <a href="#" onclick="filterDocs('all')"><i class="fa-solid fa-folder"></i>Trang chủ</a>
+        <a href="#" onclick="filterDocs('luat')"><i class="fa-solid fa-scale-balanced"></i>Luật</a>
+        <a href="#" onclick="filterDocs('nghidinh')"><i class="fa-solid fa-file-lines"></i>Nghị định</a>
+        <a href="#" onclick="filterDocs('thongtu')"><i class="fa-solid fa-file"></i>Thông tư</a>
+        <a href="#" onclick="filterDocs('huongdan')"><i class="fa-solid fa-bookmark"></i>Hướng dẫn</a>
+    </div>
+
+    <div class="content">
+        <h1>Danh sách văn bản</h1>
+        <div class="searchBox">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Số ký hiệu</th>
+                    <th>Trích yếu</th>
+                    <th>Ngày ban hành</th>
+                    <th>Ngày có hiệu lực</th>
+                    <th>Trạng thái</th>
+                    <th>File Word</th>
+                    <th>Tệp khác</th>
+                </tr>
+            </thead>
+            <tbody id="docTable"></tbody>
+        </table>
+
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+    <div class="viewCounter">
+        <i class="fa-solid fa-eye"></i>
+        <span id="visitor-count">0</span> lượt truy cập
+    </div>
+
+    <script>
+        let allDocs = [];
+        let filteredDocs = [];
+        let currentPage = 1;
+        const rowsPerPage = 25;
+
+        function parseDate(dateStr) {
+            if (!dateStr) return new Date(0);
+            let parts = dateStr.split("/");
+            return new Date(parts[2], parts[1] - 1, parts[0]);
+        }
+
+        fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
+            .then(res => res.json())
+            .then(data => {
+                allDocs = data.sort((a, b) => parseDate(b.ngay) - parseDate(a.ngay));
+                filteredDocs = allDocs;
+                renderTable();
+            });
+
+        function renderTable() {
+            let start = (currentPage - 1) * rowsPerPage;
+            let end = start + rowsPerPage;
+            let rows = filteredDocs.slice(start, end);
+            let html = "";
+
+            rows.forEach(doc => {
+                let status = "";
+                if (doc.trangthai === "OK") {
+                    status = `<span class="status-ok">Còn hiệu lực</span>`;
+                } else if (doc.trangthai === "X") {
+                    // Cột 'ghichu' là cột chứa nội dung Popup trong Google Sheet
+                    let note = doc.ghichu || "Thông tin đang được cập nhật";
+                    status = `<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`;
+                }
+
+                html += `
+                <tr onclick="openPDF('${doc.linkpdf}')">
+                    <td>${doc.so || ""}</td>
+                    <td>${doc.ten || ""}</td>
+                    <td>${doc.ngay || ""}</td>
+                    <td>${doc.hieuluc || ""}</td>
+                    <td>${status}</td>
+                    <td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+                    <td>${doc.linkkhac ? `<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+                </tr>
+                `;
+            });
+
+            document.getElementById("docTable").innerHTML = html;
+            renderPagination();
+        }
+
+        function openPDF(url) {
+            if (url) window.open(url, "_blank");
+        }
+
+        function renderPagination() {
+            let totalPages = Math.ceil(filteredDocs.length / rowsPerPage);
+            let html = "";
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<div class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</div>`;
+            }
+            document.getElementById("pagination").innerHTML = html;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderTable();
+        }
+
+        function filterDocs(type) {
+            if (type === "all") {
+                filteredDocs = allDocs;
+            } else {
+                filteredDocs = allDocs.filter(doc => doc.type === type);
+            }
+            currentPage = 1;
+            renderTable();
+        }
+
+        function searchDocs(keyword) {
+            keyword = keyword.toLowerCase();
+            filteredDocs = allDocs.filter(doc =>
+                (doc.so && doc.so.toLowerCase().includes(keyword)) ||
+                (doc.ten && doc.ten.toLowerCase().includes(keyword))
+            );
+            currentPage = 1;
+            renderTable();
+        }
+
+        window.addEventListener("load", function() {
+            const code = 'lytrunghuyen'; 
+            const url = `https://${code}.goatcounter.com/counter/TOTAL.json`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
+                    let displayViews = actualViews * 3; 
+                    document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
+                })
+                .catch(err => {
+                    console.error("Lỗi khi lấy lượt xem:", err);
+                    document.getElementById("visitor-count").innerText = "---";
+                });
+        });
+    </script>
 </body>
 </html>
