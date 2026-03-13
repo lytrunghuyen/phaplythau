@@ -160,8 +160,6 @@ width:140px;
 text-align:center;
 }
 
-/* LINK */
-
 a{
 color:#6e35e8;
 text-decoration:none;
@@ -172,20 +170,10 @@ a:hover{
 text-decoration:underline;
 }
 
-/* TRÍCH YẾU LINK STYLE */
-
-td:nth-child(2) a{
-font-weight:600;
-color:#374151;
-}
-
-td:nth-child(2) a:hover{
-color:#6e35e8;
-}
-
 /* ROW HOVER */
 
 tbody tr{
+cursor:pointer;
 transition:background .2s ease;
 }
 
@@ -323,22 +311,17 @@ let html="";
 rows.forEach(doc=>{
 
 html+=`
-<tr>
+<tr onclick="openPDF('${doc.linkpdf}')">
 
 <td>${doc.so || ""}</td>
 
-<td>
-${doc.linkpdf ? `
-<a href="${doc.linkpdf}" target="_blank">
-${doc.ten || ""}
-</a>` : doc.ten || ""}
-</td>
+<td>${doc.ten || ""}</td>
 
 <td>${doc.ngay || ""}</td>
 
 <td>
 ${doc.linkword ? `
-<a href="${doc.linkword}" target="_blank">
+<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation()">
 <i class="fa-solid fa-eye"></i> Xem
 </a>` : ""}
 </td>
@@ -352,6 +335,10 @@ document.getElementById("docTable").innerHTML=html;
 
 renderPagination();
 
+}
+
+function openPDF(url){
+window.open(url,"_blank");
 }
 
 /* PAGINATION */
