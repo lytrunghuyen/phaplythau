@@ -476,14 +476,26 @@ renderTable();
 
 /* LẤY LƯỢT XEM TỪ GOATCOUNTER */
 
-fetch("https://lytrunghuyen.goatcounter.com/api/v0/stats/total")
-.then(res=>res.json())
-.then(data=>{
-let views = data.count * 3;
-document.getElementById("visitor-count").innerText = views.toLocaleString();
+fetch("https://lytrunghuyen.goatcounter.com/counter/TOTAL.svg")
+.then(res=>res.text())
+.then(svg=>{
+
+let number = svg.match(/\d+/);
+
+if(number){
+
+let views = parseInt(number[0]) * 3;
+
+document.getElementById("visitor-count").innerText =
+views.toLocaleString();
+
+}
+
 })
 .catch(()=>{
-document.getElementById("visitor-count").innerText="0";
+
+document.getElementById("visitor-count").innerText = "0";
+
 });
 
 </script>
