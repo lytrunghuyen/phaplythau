@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -241,14 +242,21 @@ let filteredDocs=[];
 let currentPage=1;
 const rowsPerPage=25;
 
+/* CHUYỂN DATE */
+
+function parseDate(dateStr){
+let parts=dateStr.split("/");
+return new Date(parts[2],parts[1]-1,parts[0]);
+}
+
 /* LOAD DATA */
 
 fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
 .then(res=>res.json())
 .then(data=>{
 
-allDocs=data;
-filteredDocs=data;
+allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
+filteredDocs=allDocs;
 
 renderTable();
 
@@ -272,8 +280,8 @@ html+=`
 <td>${doc.so || ""}</td>
 <td>${doc.ten || ""}</td>
 <td>${doc.ngay || ""}</td>
-<td>${doc.linkpdf ? `<a href="${doc.linkpdf}" target="_blank">Xem PDF</a>` : ""}</td>
-<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank">Xem Word</a>` : ""}</td>
+<td>${doc.linkpdf ? `<a href="${doc.linkpdf}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 </tr>
 `;
 
@@ -353,3 +361,4 @@ renderTable();
 
 </body>
 </html>
+```
