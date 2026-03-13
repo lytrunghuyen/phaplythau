@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <title>Thư viện văn bản đấu thầu</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -90,12 +88,6 @@ border-radius:8px;
 font-size:14px;
 }
 
-/* TABLE WRAPPER (mobile scroll) */
-
-.table-container{
-overflow-x:auto;
-}
-
 /* TABLE */
 
 table{
@@ -103,7 +95,6 @@ width:100%;
 border-collapse:collapse;
 background:white;
 table-layout:fixed;
-min-width:720px;
 }
 
 th,td{
@@ -177,44 +168,6 @@ color:white;
 border:none;
 }
 
-/* MOBILE */
-
-@media (max-width:768px){
-
-body{
-flex-direction:column;
-}
-
-.sidebar{
-width:100%;
-height:auto;
-border-right:none;
-border-bottom:1px solid #e5e7eb;
-display:flex;
-gap:10px;
-overflow-x:auto;
-}
-
-.sidebar h2{
-display:none;
-}
-
-.sidebar a{
-font-size:14px;
-padding:10px 12px;
-white-space:nowrap;
-}
-
-.content{
-padding:20px;
-}
-
-.searchBox input{
-width:100%;
-}
-
-}
-
 </style>
 
 </head>
@@ -260,8 +213,6 @@ Hướng dẫn
 <input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
 </div>
 
-<div class="table-container">
-
 <table>
 
 <thead>
@@ -278,8 +229,6 @@ Hướng dẫn
 </tbody>
 
 </table>
-
-</div>
 
 <div class="pagination" id="pagination"></div>
 
