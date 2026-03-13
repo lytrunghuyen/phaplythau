@@ -38,19 +38,24 @@ margin-bottom:25px;
 .sidebar a{
 display:flex;
 align-items:center;
-gap:10px;
+gap:12px;
 padding:12px 14px;
 margin-bottom:6px;
 color:#374151;
-text-decoration:none; /* bỏ gạch chân */
+text-decoration:none;
 font-size:17px;
 border-radius:10px;
+}
+
+.sidebar a i{
+width:20px;
+text-align:center;
 }
 
 .sidebar a:hover{
 background:#ede9fe;
 color:#7c3aed;
-text-decoration:none; /* đảm bảo không có gạch chân */
+text-decoration:none;
 }
 
 .sidebar a.active{
@@ -165,27 +170,27 @@ border:none;
 <h2>📚 Văn bản</h2>
 
 <a href="#" onclick="filterDocs('all')">
-<i class="fa-regular fa-folder"></i>
+<i class="fa-solid fa-folder"></i>
 Trang chủ
 </a>
 
 <a href="#" onclick="filterDocs('luat')">
-<i class="fa-regular fa-id-badge"></i>
+<i class="fa-solid fa-scale-balanced"></i>
 Luật
 </a>
 
 <a href="#" onclick="filterDocs('nghidinh')">
-<i class="fa-regular fa-file-lines"></i>
+<i class="fa-solid fa-file-lines"></i>
 Nghị định
 </a>
 
 <a href="#" onclick="filterDocs('thongtu')">
-<i class="fa-regular fa-file"></i>
+<i class="fa-solid fa-file"></i>
 Thông tư
 </a>
 
 <a href="#" onclick="filterDocs('huongdan')">
-<i class="fa-regular fa-bookmark"></i>
+<i class="fa-solid fa-bookmark"></i>
 Hướng dẫn
 </a>
 
