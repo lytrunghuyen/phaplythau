@@ -306,7 +306,8 @@ Hướng dẫn
 
 <h1>Danh sách văn bản</h1>
 <div class="viewCounter">
-👁 <span id="visitor-count">...</span> lượt truy cập
+👁 <img src="https://lytrunghuyen.goatcounter.com/counter/TOTAL.svg" 
+style="height:14px;vertical-align:middle;"> lượt truy cập
 </div>
 
 <div class="searchBox">
@@ -473,12 +474,6 @@ currentPage=1;
 renderTable();
 
 }
-
-fetch("https://lytrunghuyen.goatcounter.com/counter/TOTAL.json")
-.then(res=>res.json())
-.then(data=>{
-document.getElementById("visitor-count").innerText = data.count;
-});
 
 </script>
 
