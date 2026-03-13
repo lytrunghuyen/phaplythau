@@ -11,13 +11,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
+  
 thead th{
 position:sticky;
 top:0;
 z-index:5;
 }
-
+  
 body{
 font-family:'Montserrat',sans-serif;
 margin:0;
@@ -66,6 +66,7 @@ text-align:center;
 .sidebar a:hover{
 background:#ede9fe;
 color:#7c3aed;
+text-decoration:none;
 }
 
 .sidebar a.active{
@@ -96,6 +97,7 @@ top:50%;
 transform:translateY(-50%);
 color:#9ca3af;
 font-size:14px;
+transition:color .25s ease;
 }
 
 .searchBox input{
@@ -108,14 +110,25 @@ transition:all .25s ease;
 background:white;
 }
 
+/* hover */
+
 .searchBox input:hover{
 border-color:#c4b5fd;
 }
+
+/* focus */
 
 .searchBox input:focus{
 outline:none;
 border-color:#7c3aed;
 box-shadow:0 0 0 3px rgba(124,58,237,0.15);
+}
+
+/* icon */
+
+.searchBox input:focus + i,
+.searchBox:focus-within i{
+color:#7c3aed;
 }
 
 /* TABLE */
@@ -134,6 +147,7 @@ padding:14px;
 text-align:left;
 vertical-align:top;
 overflow-wrap:break-word;
+word-break:normal;
 }
 
 th{
@@ -170,7 +184,7 @@ a:hover{
 text-decoration:underline;
 }
 
-/* ROW HOVER */
+/* HOVER ROW EFFECT */
 
 tbody tr{
 cursor:pointer;
@@ -277,7 +291,7 @@ let filteredDocs=[];
 let currentPage=1;
 const rowsPerPage=25;
 
-/* DATE */
+/* CHUYỂN DATE */
 
 function parseDate(dateStr){
 let parts=dateStr.split("/");
@@ -312,20 +326,10 @@ rows.forEach(doc=>{
 
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}')">
-
 <td>${doc.so || ""}</td>
-
 <td>${doc.ten || ""}</td>
-
 <td>${doc.ngay || ""}</td>
-
-<td>
-${doc.linkword ? `
-<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation()">
-<i class="fa-solid fa-eye"></i> Xem
-</a>` : ""}
-</td>
-
+<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 </tr>
 `;
 
