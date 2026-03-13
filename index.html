@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<script data-goatcounter="https://lytrunghuyen.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
 <head>
 <meta charset="utf-8">
 <title>Thư viện văn bản đấu thầu</title>
@@ -23,6 +25,12 @@ font-family:'Montserrat',sans-serif;
 margin:0;
 display:flex;
 background:#f8f9fb;
+}
+
+.viewCounter{
+font-size:14px;
+color:#6b7280;
+margin-bottom:15px;
 }
 
 /* SIDEBAR */
@@ -300,6 +308,9 @@ Hướng dẫn
 <div class="content">
 
 <h1>Danh sách văn bản</h1>
+<div class="viewCounter">
+👁 <span id="visitor-count">...</span> lượt truy cập
+</div>
 
 <div class="searchBox">
 <i class="fa-solid fa-magnifying-glass"></i>
@@ -465,7 +476,11 @@ currentPage=1;
 renderTable();
 
 }
-
+fetch("https://thuvienvanban.goatcounter.com/counter/TOTAL.json")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("visitor-count").innerText = data.count;
+});
 </script>
 
 </body>
