@@ -91,6 +91,7 @@ top:50%;
 transform:translateY(-50%);
 color:#9ca3af;
 font-size:14px;
+transition:color .25s ease;
 }
 
 .searchBox input{
@@ -99,6 +100,29 @@ padding:10px 12px 10px 34px;
 border:1px solid #ddd;
 border-radius:8px;
 font-size:14px;
+transition:all .25s ease;
+background:white;
+}
+
+/* hover */
+
+.searchBox input:hover{
+border-color:#c4b5fd;
+}
+
+/* focus */
+
+.searchBox input:focus{
+outline:none;
+border-color:#7c3aed;
+box-shadow:0 0 0 3px rgba(124,58,237,0.15);
+}
+
+/* icon */
+
+.searchBox input:focus + i,
+.searchBox:focus-within i{
+color:#7c3aed;
 }
 
 /* TABLE */
