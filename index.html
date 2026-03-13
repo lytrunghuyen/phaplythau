@@ -30,10 +30,25 @@ display:flex;
 background:#f8f9fb;
 }
 
+/* VIEW COUNTER */
+
 .viewCounter{
+position:fixed;
+right:20px;
+bottom:20px;
 font-size:14px;
 color:#6b7280;
-margin-bottom:15px;
+background:white;
+padding:10px 14px;
+border-radius:10px;
+box-shadow:0 8px 25px rgba(124,58,237,0.25);
+border:1px solid rgba(124,58,237,0.15);
+z-index:999;
+}
+
+.viewCounter i{
+color:#7c3aed;
+margin-right:6px;
 }
 
 /* SIDEBAR */
@@ -305,11 +320,6 @@ Hướng dẫn
 <div class="content">
 
 <h1>Danh sách văn bản</h1>
-  
-<div class="viewCounter">
-    <i class="fa-solid fa-eye"></i>
-    <span id="visitor-count">0</span> lượt truy cập
-</div>
 
 <div class="searchBox">
 <i class="fa-solid fa-magnifying-glass"></i>
@@ -339,6 +349,13 @@ Hướng dẫn
 
 </div>
 
+<!-- VIEW COUNTER -->
+
+<div class="viewCounter">
+<i class="fa-solid fa-eye"></i>
+<span id="visitor-count">0</span> lượt truy cập
+</div>
+
 <script>
 
 let allDocs=[];
@@ -346,14 +363,10 @@ let filteredDocs=[];
 let currentPage=1;
 const rowsPerPage=25;
 
-/* CHUYỂN DATE */
-
 function parseDate(dateStr){
 let parts=dateStr.split("/");
 return new Date(parts[2],parts[1]-1,parts[0]);
 }
-
-/* LOAD DATA */
 
 fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
 .then(res=>res.json())
@@ -365,8 +378,6 @@ filteredDocs=allDocs;
 renderTable();
 
 });
-
-/* RENDER TABLE */
 
 function renderTable(){
 
@@ -412,8 +423,6 @@ function openPDF(url){
 if(url) window.open(url,"_blank");
 }
 
-/* PAGINATION */
-
 function renderPagination(){
 
 let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
@@ -437,8 +446,6 @@ renderTable();
 
 }
 
-/* FILTER */
-
 function filterDocs(type){
 
 if(type==="all"){
@@ -457,8 +464,6 @@ renderTable();
 
 }
 
-/* SEARCH */
-
 function searchDocs(keyword){
 
 keyword=keyword.toLowerCase();
@@ -476,27 +481,28 @@ renderTable();
 
 }
 
-/* LẤY LƯỢT XEM TỪ GOATCOUNTER */
-
 window.addEventListener("load", function() {
-    // Thay 'lytrunghuyen' bằng code của bạn nếu khác
-    const code = 'lytrunghuyen'; 
-    // Endpoint lấy số liệu dạng JSON
-    const url = `https://${code}.goatcounter.com/counter/TOTAL.json`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            // Lấy số lượng count từ JSON và nhân 3 (như logic cũ của bạn)
-            let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
-            let displayViews = actualViews * 3; 
+const code = 'lytrunghuyen'; 
+const url = `https://${code}.goatcounter.com/counter/TOTAL.json`;
 
-            document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
-        })
-        .catch(err => {
-            console.error("Lỗi khi lấy lượt xem:", err);
-            document.getElementById("visitor-count").innerText = "---";
-        });
+fetch(url)
+.then(response => response.json())
+.then(data => {
+
+let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
+let displayViews = actualViews * 3; 
+
+document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
+
+})
+.catch(err => {
+
+console.error("Lỗi khi lấy lượt xem:", err);
+document.getElementById("visitor-count").innerText = "---";
+
+});
+
 });
 
 </script>
