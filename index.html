@@ -491,30 +491,25 @@ renderTable();
 
 /* LẤY LƯỢT XEM TỪ GOATCOUNTER */
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function() {
 
-fetch("https://api.allorigins.win/get?url=" + 
-encodeURIComponent("https://lytrunghuyen.goatcounter.com/api/v0/stats/total"))
+const code='lytrunghuyen';
 
-.then(res => res.json())
+const url=`https://${code}.goatcounter.com/counter/TOTAL.json`;
 
-.then(data => {
+fetch(url)
+.then(response=>response.json())
+.then(data=>{
 
-let stats = JSON.parse(data.contents);
+let actualViews=parseInt(data.count.replace(/[^0-9]/g,''))||0;
 
-let actualViews = stats.count || 0;
+let displayViews=(actualViews*5)+7;
 
-let displayViews = (actualViews * 5) + 7;
-
-document.getElementById("visitor-count").innerText =
-displayViews.toLocaleString();
+document.getElementById("visitor-count").innerText=displayViews.toLocaleString();
 
 })
-
-.catch(() => {
-
+.catch(err=>{
 document.getElementById("visitor-count").innerText="---";
-
 });
 
 });
