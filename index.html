@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,11 +82,21 @@ overflow-x:auto;
 
 .searchBox{
 margin-bottom:15px;
+position:relative;
+}
+
+.searchBox i{
+position:absolute;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+color:#9ca3af;
+font-size:14px;
 }
 
 .searchBox input{
 width:300px;
-padding:10px 12px;
+padding:10px 12px 10px 34px;
 border:1px solid #ddd;
 border-radius:8px;
 font-size:14px;
@@ -214,6 +225,7 @@ Hướng dẫn
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
+<i class="fa-solid fa-magnifying-glass"></i>
 <input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
 </div>
 
@@ -364,3 +376,4 @@ renderTable();
 
 </body>
 </html>
+```
