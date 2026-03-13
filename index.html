@@ -307,9 +307,8 @@ Hướng dẫn
 <h1>Danh sách văn bản</h1>
   
 <div class="viewCounter">
-<i class="fa-solid fa-eye"></i>
-<span id="visitor-count">...</span> lượt xem
-<img id="gc-counter" src="https://lytrunghuyen.goatcounter.com/counter/TOTAL.svg" style="display:none">
+    <i class="fa-solid fa-eye"></i>
+    <span id="visitor-count">0</span> lượt truy cập
 </div>
 
 <div class="searchBox">
@@ -479,29 +478,25 @@ renderTable();
 
 /* LẤY LƯỢT XEM TỪ GOATCOUNTER */
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function() {
+    // Thay 'lytrunghuyen' bằng code của bạn nếu khác
+    const code = 'lytrunghuyen'; 
+    // Endpoint lấy số liệu dạng JSON
+    const url = `https://${code}.goatcounter.com/counter/TOTAL.json`;
 
-let img = document.getElementById("gc-counter");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Lấy số lượng count từ JSON và nhân 3 (như logic cũ của bạn)
+            let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
+            let displayViews = actualViews * 3; 
 
-img.onload = function(){
-
-let text = img.contentDocument ?
-img.contentDocument.body.textContent :
-img.alt;
-
-let number = text.match(/\d+/);
-
-if(number){
-
-let views = parseInt(number[0]) * 3;
-
-document.getElementById("visitor-count").innerText =
-views.toLocaleString();
-
-}
-
-};
-
+            document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
+        })
+        .catch(err => {
+            console.error("Lỗi khi lấy lượt xem:", err);
+            document.getElementById("visitor-count").innerText = "---";
+        });
 });
 
 </script>
