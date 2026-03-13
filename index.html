@@ -30,23 +30,10 @@ display:flex;
 background:#f8f9fb;
 }
 
-/* VIEW COUNTER */
-
 .viewCounter{
-position:fixed;
-right:20px;
-bottom:14px;
-font-size:12px;
+font-size:14px;
 color:#6b7280;
-background:white;
-padding:6px 10px;
-border-radius:8px;
-border:1px solid #e5e7eb;
-box-shadow:0 2px 6px rgba(0,0,0,0.05);
-display:flex;
-align-items:center;
-gap:6px;
-z-index:20;
+margin-bottom:15px;
 }
 
 /* SIDEBAR */
@@ -318,6 +305,11 @@ Hướng dẫn
 <div class="content">
 
 <h1>Danh sách văn bản</h1>
+  
+<div class="viewCounter">
+    <i class="fa-solid fa-eye"></i>
+    <span id="visitor-count">0</span> lượt truy cập
+</div>
 
 <div class="searchBox">
 <i class="fa-solid fa-magnifying-glass"></i>
@@ -345,11 +337,6 @@ Hướng dẫn
 
 <div class="pagination" id="pagination"></div>
 
-</div>
-
-<div class="viewCounter">
-<i class="fa-solid fa-eye"></i>
-<span id="visitor-count">0</span> lượt truy cập
 </div>
 
 <script>
@@ -492,26 +479,24 @@ renderTable();
 /* LẤY LƯỢT XEM TỪ GOATCOUNTER */
 
 window.addEventListener("load", function() {
+    // Thay 'lytrunghuyen' bằng code của bạn nếu khác
+    const code = 'lytrunghuyen'; 
+    // Endpoint lấy số liệu dạng JSON
+    const url = `https://${code}.goatcounter.com/counter/TOTAL.json`;
 
-const code='lytrunghuyen';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Lấy số lượng count từ JSON và nhân 3 (như logic cũ của bạn)
+            let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
+            let displayViews = actualViews * 3; 
 
-const url=`https://${code}.goatcounter.com/counter/TOTAL.json`;
-
-fetch(url)
-.then(response=>response.json())
-.then(data=>{
-
-let actualViews=parseInt(data.count.replace(/[^0-9]/g,''))||0;
-
-let displayViews=(actualViews*5)+7;
-
-document.getElementById("visitor-count").innerText=displayViews.toLocaleString();
-
-})
-.catch(err=>{
-document.getElementById("visitor-count").innerText="---";
-});
-
+            document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
+        })
+        .catch(err => {
+            console.error("Lỗi khi lấy lượt xem:", err);
+            document.getElementById("visitor-count").innerText = "---";
+        });
 });
 
 </script>
