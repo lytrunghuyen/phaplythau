@@ -34,37 +34,16 @@ background:#f8f9fb;
 
 .viewCounter{
 position:fixed;
-right:20px;
-bottom:20px;
+right:18px;
+bottom:18px;
 font-size:14px;
-color:#4b5563;
-background:rgba(255,255,255,0.75);
-padding:10px 16px;
-border-radius:12px;
-border:1px solid rgba(124,58,237,0.15);
-backdrop-filter:blur(8px);
-box-shadow:
-0 10px 25px rgba(124,58,237,0.25),
-0 0 0 1px rgba(124,58,237,0.05);
+color:#6b7280;
+background:white;
+padding:8px 14px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(124,58,237,0.12);
+border:1px solid rgba(124,58,237,0.08);
 z-index:999;
-transition:all .25s ease;
-}
-
-.viewCounter:hover{
-transform:translateY(-2px);
-box-shadow:
-0 14px 35px rgba(124,58,237,0.35),
-0 0 0 1px rgba(124,58,237,0.08);
-}
-
-.viewCounter i{
-color:#7c3aed;
-margin-right:8px;
-}
-
-#visitor-count{
-font-weight:600;
-color:#7c3aed;
 }
 
 /* SIDEBAR */
@@ -372,8 +351,6 @@ Hướng dẫn
 
 <script>
 
-/* JS GIỮ NGUYÊN */
-
 let allDocs=[];
 let filteredDocs=[];
 let currentPage=1;
@@ -387,9 +364,12 @@ return new Date(parts[2],parts[1]-1,parts[0]);
 fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
 .then(res=>res.json())
 .then(data=>{
+
 allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
 filteredDocs=allDocs;
+
 renderTable();
+
 });
 
 function renderTable(){
@@ -443,7 +423,9 @@ let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
 let html="";
 
 for(let i=1;i<=totalPages;i++){
+
 html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
+
 }
 
 document.getElementById("pagination").innerHTML=html;
@@ -451,20 +433,28 @@ document.getElementById("pagination").innerHTML=html;
 }
 
 function changePage(page){
+
 currentPage=page;
 renderTable();
+
 }
 
 function filterDocs(type){
 
 if(type==="all"){
+
 filteredDocs=allDocs;
+
 }else{
+
 filteredDocs=allDocs.filter(doc=>doc.type===type);
+
 }
 
 currentPage=1;
+
 renderTable();
+
 }
 
 function searchDocs(keyword){
@@ -472,12 +462,16 @@ function searchDocs(keyword){
 keyword=keyword.toLowerCase();
 
 filteredDocs=allDocs.filter(doc=>
+
 (doc.so && doc.so.toLowerCase().includes(keyword)) ||
 (doc.ten && doc.ten.toLowerCase().includes(keyword))
+
 );
 
 currentPage=1;
+
 renderTable();
+
 }
 
 window.addEventListener("load", function() {
