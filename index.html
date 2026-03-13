@@ -138,7 +138,7 @@ width:100%;
 border-collapse:collapse;
 background:white;
 table-layout:auto;
-min-width:700px;
+min-width:900px;
 }
 
 th,td{
@@ -170,7 +170,20 @@ width:140px;
 }
 
 th:nth-child(4), td:nth-child(4){
-width:140px;
+width:150px;
+}
+
+th:nth-child(5), td:nth-child(5){
+width:150px;
+}
+
+th:nth-child(6), td:nth-child(6){
+width:120px;
+text-align:center;
+}
+
+th:nth-child(7), td:nth-child(7){
+width:120px;
 text-align:center;
 }
 
@@ -216,6 +229,18 @@ background:white;
 background:#6e35e8;
 color:white;
 border:none;
+}
+
+/* STATUS */
+
+.status-ok{
+color:#16a34a;
+font-weight:600;
+}
+
+.status-x{
+color:#dc2626;
+font-weight:600;
 }
 
 </style>
@@ -271,7 +296,10 @@ Hướng dẫn
 <th>Số ký hiệu</th>
 <th>Trích yếu</th>
 <th>Ngày ban hành</th>
+<th>Ngày có hiệu lực</th>
+<th>Trạng thái</th>
 <th>File Word</th>
+<th>Tệp khác</th>
 </tr>
 </thead>
 
@@ -324,12 +352,24 @@ let html="";
 
 rows.forEach(doc=>{
 
+let status="";
+
+if(doc.trangthai==="OK"){
+status=`<span class="status-ok">Còn hiệu lực</span>`;
+}
+else if(doc.trangthai==="X"){
+status=`<span class="status-x">Hết hiệu lực</span>`;
+}
+
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}')">
 <td>${doc.so || ""}</td>
 <td>${doc.ten || ""}</td>
 <td>${doc.ngay || ""}</td>
+<td>${doc.hieuluc || ""}</td>
+<td>${status}</td>
 <td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+<td>${doc.linkkhac ? `<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 </tr>
 `;
 
