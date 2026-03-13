@@ -305,8 +305,11 @@ Hướng dẫn
 <div class="content">
 
 <h1>Danh sách văn bản</h1>
+  
 <div class="viewCounter">
-<i class="fa-solid fa-eye"></i> <span id="visitor-count">...</span> lượt xem
+<i class="fa-solid fa-eye"></i>
+<span id="visitor-count">...</span> lượt xem
+<img id="gc-counter" src="https://lytrunghuyen.goatcounter.com/counter/TOTAL.svg" style="display:none">
 </div>
 
 <div class="searchBox">
@@ -476,11 +479,17 @@ renderTable();
 
 /* LẤY LƯỢT XEM TỪ GOATCOUNTER */
 
-fetch("https://lytrunghuyen.goatcounter.com/counter/TOTAL.svg")
-.then(res=>res.text())
-.then(svg=>{
+window.addEventListener("load", function(){
 
-let number = svg.match(/\d+/);
+let img = document.getElementById("gc-counter");
+
+img.onload = function(){
+
+let text = img.contentDocument ?
+img.contentDocument.body.textContent :
+img.alt;
+
+let number = text.match(/\d+/);
 
 if(number){
 
@@ -491,10 +500,7 @@ views.toLocaleString();
 
 }
 
-})
-.catch(()=>{
-
-document.getElementById("visitor-count").innerText = "0";
+};
 
 });
 
