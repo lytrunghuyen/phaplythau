@@ -99,8 +99,8 @@ border-bottom:1px solid #eee;
 padding:14px;
 text-align:left;
 vertical-align:top;
-word-wrap:break-word;
 word-break:break-word;
+white-space:normal;
 }
 
 th{
@@ -108,10 +108,10 @@ background:#6e35e8;
 color:white;
 }
 
-/* FIX WIDTH */
+/* COLUMN WIDTH */
 
 th:nth-child(1), td:nth-child(1){
-width:160px;
+width:140px;
 }
 
 th:nth-child(2), td:nth-child(2){
@@ -123,7 +123,13 @@ width:120px;
 }
 
 th:nth-child(4), td:nth-child(4){
-width:120px;
+width:150px;
+text-align:center;
+}
+
+th:nth-child(5), td:nth-child(5){
+width:170px;
+text-align:center;
 }
 
 a{
@@ -209,9 +215,10 @@ Hướng dẫn
 <thead>
 <tr>
 <th>Số văn bản</th>
-<th>Tên</th>
-<th>Ngày</th>
-<th>Link</th>
+<th>Tên văn bản</th>
+<th>Ngày ký</th>
+<th>Văn bản gốc</th>
+<th>Xem định dạng Word</th>
 </tr>
 </thead>
 
@@ -259,10 +266,11 @@ rows.forEach(doc=>{
 
 html+=`
 <tr>
-<td>${doc.so}</td>
-<td>${doc.ten}</td>
-<td>${doc.ngay}</td>
-<td><a href="${doc.link}" target="_blank">Xem PDF</a></td>
+<td>${doc.so || ""}</td>
+<td>${doc.ten || ""}</td>
+<td>${doc.ngay || ""}</td>
+<td>${doc.linkpdf ? `<a href="${doc.linkpdf}" target="_blank">Xem PDF</a>` : ""}</td>
+<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank">Tải Word</a>` : ""}</td>
 </tr>
 `;
 
