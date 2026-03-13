@@ -38,11 +38,11 @@ margin-bottom:25px;
 .sidebar a{
 display:flex;
 align-items:center;
-gap:12px;
+gap:10px;
 padding:12px 14px;
 margin-bottom:6px;
 color:#374151;
-text-decoration:none;
+text-decoration:none; /* bỏ gạch chân */
 font-size:17px;
 border-radius:10px;
 }
@@ -50,6 +50,7 @@ border-radius:10px;
 .sidebar a:hover{
 background:#ede9fe;
 color:#7c3aed;
+text-decoration:none; /* đảm bảo không có gạch chân */
 }
 
 .sidebar a.active{
@@ -65,13 +66,27 @@ flex:1;
 padding:35px;
 }
 
+/* SEARCH */
+
+.searchBox{
+margin-bottom:15px;
+}
+
+.searchBox input{
+width:300px;
+padding:10px 12px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:14px;
+}
+
 /* TABLE */
 
 table{
 width:100%;
 border-collapse:collapse;
 background:white;
-table-layout:fixed; /* QUAN TRỌNG: cố định layout */
+table-layout:fixed;
 }
 
 th,td{
@@ -88,7 +103,7 @@ background:#6e35e8;
 color:white;
 }
 
-/* FIX WIDTH COLUMNS */
+/* FIX WIDTH */
 
 th:nth-child(1), td:nth-child(1){
 width:160px;
@@ -116,6 +131,29 @@ a:hover{
 text-decoration:underline;
 }
 
+/* PAGINATION */
+
+.pagination{
+margin-top:20px;
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+}
+
+.page-btn{
+padding:6px 10px;
+border:1px solid #ddd;
+cursor:pointer;
+border-radius:6px;
+background:white;
+}
+
+.page-btn.active{
+background:#6e35e8;
+color:white;
+border:none;
+}
+
 </style>
 
 </head>
@@ -126,17 +164,40 @@ text-decoration:underline;
 
 <h2>📚 Văn bản</h2>
 
-<a href="#" onclick="filterDocs('all')">Trang chủ</a>
-<a href="#" onclick="filterDocs('luat')">Luật</a>
-<a href="#" onclick="filterDocs('nghidinh')">Nghị định</a>
-<a href="#" onclick="filterDocs('thongtu')">Thông tư</a>
-<a href="#" onclick="filterDocs('huongdan')">Hướng dẫn</a>
+<a href="#" onclick="filterDocs('all')">
+<i class="fa-regular fa-folder"></i>
+Trang chủ
+</a>
+
+<a href="#" onclick="filterDocs('luat')">
+<i class="fa-regular fa-scale-balanced"></i>
+Luật
+</a>
+
+<a href="#" onclick="filterDocs('nghidinh')">
+<i class="fa-regular fa-file-lines"></i>
+Nghị định
+</a>
+
+<a href="#" onclick="filterDocs('thongtu')">
+<i class="fa-regular fa-file"></i>
+Thông tư
+</a>
+
+<a href="#" onclick="filterDocs('huongdan')">
+<i class="fa-regular fa-bookmark"></i>
+Hướng dẫn
+</a>
 
 </div>
 
 <div class="content">
 
 <h1>Danh sách văn bản</h1>
+
+<div class="searchBox">
+<input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
+</div>
 
 <table>
 
@@ -154,29 +215,45 @@ text-decoration:underline;
 
 </table>
 
+<div class="pagination" id="pagination"></div>
+
 </div>
 
 <script>
 
 let allDocs=[];
+let filteredDocs=[];
+let currentPage=1;
+const rowsPerPage=50;
+
+/* LOAD DATA */
 
 fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
 .then(res=>res.json())
 .then(data=>{
 
 allDocs=data;
-renderTable(data);
+filteredDocs=data;
+
+renderTable();
 
 });
 
-function renderTable(data){
+/* RENDER TABLE */
+
+function renderTable(){
+
+let start=(currentPage-1)*rowsPerPage;
+let end=start+rowsPerPage;
+
+let rows=filteredDocs.slice(start,end);
 
 let html="";
 
-data.forEach(doc=>{
+rows.forEach(doc=>{
 
 html+=`
-<tr data-type="${doc.type}">
+<tr>
 <td>${doc.so}</td>
 <td>${doc.ten}</td>
 <td>${doc.ngay}</td>
@@ -188,17 +265,71 @@ html+=`
 
 document.getElementById("docTable").innerHTML=html;
 
+renderPagination();
+
 }
+
+/* PAGINATION */
+
+function renderPagination(){
+
+let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
+
+let html="";
+
+for(let i=1;i<=totalPages;i++){
+
+html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
+
+}
+
+document.getElementById("pagination").innerHTML=html;
+
+}
+
+function changePage(page){
+
+currentPage=page;
+renderTable();
+
+}
+
+/* FILTER */
 
 function filterDocs(type){
 
 if(type==="all"){
-renderTable(allDocs);
-return;
+
+filteredDocs=allDocs;
+
+}else{
+
+filteredDocs=allDocs.filter(doc=>doc.type===type);
+
 }
 
-let filtered=allDocs.filter(doc=>doc.type===type);
-renderTable(filtered);
+currentPage=1;
+
+renderTable();
+
+}
+
+/* SEARCH */
+
+function searchDocs(keyword){
+
+keyword=keyword.toLowerCase();
+
+filteredDocs=allDocs.filter(doc=>
+
+(doc.so && doc.so.toLowerCase().includes(keyword)) ||
+(doc.ten && doc.ten.toLowerCase().includes(keyword))
+
+);
+
+currentPage=1;
+
+renderTable();
 
 }
 
