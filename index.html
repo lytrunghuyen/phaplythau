@@ -17,6 +17,8 @@ display:flex;
 background:#f8f9fb;
 }
 
+/* SIDEBAR */
+
 .sidebar{
 width:260px;
 background:#f2f3f5;
@@ -56,26 +58,62 @@ color:#7c3aed;
 font-weight:600;
 }
 
+/* CONTENT */
+
 .content{
 flex:1;
 padding:35px;
 }
 
+/* TABLE */
+
 table{
 width:100%;
 border-collapse:collapse;
 background:white;
+table-layout:fixed; /* QUAN TRỌNG: cố định layout */
 }
 
 th,td{
 border-bottom:1px solid #eee;
 padding:14px;
 text-align:left;
+vertical-align:top;
+word-wrap:break-word;
+word-break:break-word;
 }
 
 th{
 background:#6e35e8;
 color:white;
+}
+
+/* FIX WIDTH COLUMNS */
+
+th:nth-child(1), td:nth-child(1){
+width:160px;
+}
+
+th:nth-child(2), td:nth-child(2){
+width:auto;
+}
+
+th:nth-child(3), td:nth-child(3){
+width:120px;
+}
+
+th:nth-child(4), td:nth-child(4){
+width:120px;
+}
+
+a{
+color:#6e35e8;
+text-decoration:none;
+font-weight:500;
+}
+
+a:hover{
+text-decoration:underline;
 }
 
 </style>
