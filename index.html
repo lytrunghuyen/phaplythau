@@ -474,6 +474,18 @@ renderTable();
 
 }
 
+/* LẤY LƯỢT XEM TỪ GOATCOUNTER */
+
+fetch("https://lytrunghuyen.goatcounter.com/api/v0/stats/total")
+.then(res=>res.json())
+.then(data=>{
+let views = data.count * 3;
+document.getElementById("visitor-count").innerText = views.toLocaleString();
+})
+.catch(()=>{
+document.getElementById("visitor-count").innerText="0";
+});
+
 </script>
 
 </body>
