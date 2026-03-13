@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+
 <html>
+<head>
+
 <script data-goatcounter="https://lytrunghuyen.goatcounter.com/count"
 async src="//gc.zgo.at/count.js"></script>
-<head>
+
 <meta charset="utf-8">
 <title>Thư viện văn bản đấu thầu</title>
 
@@ -118,21 +121,15 @@ transition:all .25s ease;
 background:white;
 }
 
-/* hover */
-
 .searchBox input:hover{
 border-color:#c4b5fd;
 }
-
-/* focus */
 
 .searchBox input:focus{
 outline:none;
 border-color:#7c3aed;
 box-shadow:0 0 0 3px rgba(124,58,237,0.15);
 }
-
-/* icon */
 
 .searchBox input:focus + i,
 .searchBox:focus-within i{
@@ -476,11 +473,13 @@ currentPage=1;
 renderTable();
 
 }
-fetch("https://thuvienvanban.goatcounter.com/counter/TOTAL.json")
+
+fetch("https://lytrunghuyen.goatcounter.com/counter/TOTAL.json")
 .then(res=>res.json())
 .then(data=>{
 document.getElementById("visitor-count").innerText = data.count;
 });
+
 </script>
 
 </body>
