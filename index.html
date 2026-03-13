@@ -329,7 +329,7 @@ html+=`
 <td>${doc.so || ""}</td>
 <td>${doc.ten || ""}</td>
 <td>${doc.ngay || ""}</td>
-<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
+<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>` : ""}</td>
 </tr>
 `;
 
@@ -342,7 +342,7 @@ renderPagination();
 }
 
 function openPDF(url){
-window.open(url,"_blank");
+if(url) window.open(url,"_blank");
 }
 
 /* PAGINATION */
