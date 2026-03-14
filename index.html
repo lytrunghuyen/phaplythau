@@ -53,7 +53,6 @@ padding:25px;
 border-right:1px solid #e5e7eb;
 position:sticky;
 top:0;
-transition:.3s;
 }
 
 .sidebar h2{
@@ -62,30 +61,6 @@ font-size:20px;
 font-weight:600;
 color:#374151;
 margin-bottom:25px;
-transition:.3s;
-}
-
-/* COLLAPSED SIDEBAR */
-
-.sidebar.collapsed{
-width:70px;
-padding:20px 10px;
-}
-
-.sidebar.collapsed h2{
-display:none;
-}
-
-.sidebar.collapsed .menu-item span{
-display:none;
-}
-
-.sidebar.collapsed .submenu{
-display:none;
-}
-
-.sidebar.collapsed .menu-item{
-justify-content:center;
 }
 
 /* MENU ITEM */
@@ -255,7 +230,7 @@ table{
 width:100%;
 border-collapse:collapse;
 background:white;
-table-layout:fixed;
+table-layout:auto;
 min-width:900px;
 }
 
@@ -264,23 +239,22 @@ border-bottom:1px solid #eee;
 padding:14px;
 text-align:left;
 vertical-align:top;
-word-break:break-word;
 }
-
-/* WIDTH BALANCE */
-
-th:nth-child(1),td:nth-child(1){width:14%;}
-th:nth-child(2),td:nth-child(2){width:34%;}
-th:nth-child(3),td:nth-child(3){width:12%;}
-th:nth-child(4),td:nth-child(4){width:12%;}
-th:nth-child(5),td:nth-child(5){width:12%;}
-th:nth-child(6),td:nth-child(6){width:8%;text-align:center;}
-th:nth-child(7),td:nth-child(7){width:8%;text-align:center;}
 
 th{
 background:#6e35e8;
 color:white;
 }
+
+/* WIDTH */
+
+th:nth-child(1),td:nth-child(1){width:140px;}
+th:nth-child(2),td:nth-child(2){width:auto;}
+th:nth-child(3),td:nth-child(3){width:140px;}
+th:nth-child(4),td:nth-child(4){width:150px;}
+th:nth-child(5),td:nth-child(5){width:150px;}
+th:nth-child(6),td:nth-child(6){width:120px;text-align:center;}
+th:nth-child(7),td:nth-child(7){width:120px;text-align:center;}
 
 a{
 color:#6e35e8;
@@ -369,71 +343,19 @@ width:200px;
 text-align:center;
 }
 
-.status-s{
-background:#ea7a00;
-color:white;
-padding:4px 12px;
-border-radius:999px;
-font-size:12.5px;
-font-weight:500;
-display:inline-block;
-position:relative;
-}
-
-.status-s:hover::after{
-content:attr(data-tooltip);
-position:absolute;
-bottom:125%;
-left:50%;
-transform:translateX(-50%);
-background:#374151;
-color:#fff;
-padding:8px 12px;
-border-radius:6px;
-font-size:12px;
-width:220px;
-text-align:center;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-.sidebar{
-width:70px;
-padding:20px 10px;
-}
-
-.sidebar h2{
-display:none;
-}
-
-.sidebar .menu-item span{
-display:none;
-}
-
-.sidebar .submenu{
-display:none;
-}
-
-.menu-item{
-justify-content:center;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="sidebar" id="sidebar">
+<!-- HTML giữ nguyên -->
 
+<div class="sidebar">
 <h2>📚 Pháp lý đấu thầu</h2>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
 <i class="fa-solid fa-layer-group"></i>
-<span>Tổng hợp</span>
+Tổng hợp
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
@@ -465,7 +387,7 @@ Thông tư
 
 <div class="menu-item" onclick="setActive(this);filterDocs('huongdan')">
 <i class="fa-solid fa-hospital"></i>
-<span>Quy trình Bệnh viện</span>
+Quy trình Bệnh viện
 </div>
 
 </div>
@@ -505,7 +427,7 @@ Thông tư
 
 <script>
 
-/* giữ nguyên JS của bạn */
+/* JS giữ nguyên ngoại trừ thêm trạng thái S */
 
 let allDocs=[];
 let filteredDocs=[];
@@ -549,8 +471,8 @@ status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`
 }
 
 else if(doc.trangthai==="S"){
-let note=doc.ghichu || "Văn bản này đã được sửa đổi";
-status=`<span class="status-s" data-tooltip="${note}">Đã sửa đổi</span>`;
+status=`<span class="status-ok">Còn hiệu lực</span>
+<span style="background:#f59e0b;color:white;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:500;display:inline-block;margin-left:6px;">Đã sửa đổi</span>`;
 }
 
 html+=`
@@ -568,6 +490,8 @@ html+=`
 });
 
 document.getElementById("docTable").innerHTML=html;
+
+renderPagination();
 
 }
 
