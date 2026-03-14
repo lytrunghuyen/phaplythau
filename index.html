@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script data-goatcounter="https://lytrunghuyen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 <meta charset="utf-8">
@@ -75,16 +76,13 @@ font-size:17px;
 border-radius:10px;
 font-weight:500;
 cursor:pointer;
-
-transition:
-background-color .18s ease,
-color .18s ease;
+transition:background-color .18s ease,color .18s ease;
 }
 
 .menu-item i{
-width:20px;
+width:22px;
+min-width:22px;
 text-align:center;
-transition:color .18s ease;
 }
 
 .menu-item:hover{
@@ -113,6 +111,12 @@ justify-content:space-between;
 align-items:center;
 }
 
+.dropdown span{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
 .caret{
 transition:transform .25s ease;
 font-size:13px;
@@ -127,12 +131,12 @@ transform:rotate(90deg);
 .submenu{
 margin-left:18px;
 overflow:hidden;
-max-height:0;
+max-height:300px;
 transition:max-height .28s ease;
 }
 
-.submenu.show{
-max-height:300px;
+.submenu.hide{
+max-height:0;
 }
 
 .submenu a{
@@ -144,21 +148,20 @@ padding:10px 12px;
 border-radius:8px;
 color:#374151;
 text-decoration:none;
-
-transition:
-background-color .18s ease,
-color .18s ease;
 }
 
 .submenu a i{
+width:22px;
+min-width:22px;
+text-align:center;
 font-size:13px;
 color:#9ca3af;
-transition:color .18s ease;
 }
 
 .submenu a:hover{
 background:#6e35e8;
 color:white;
+text-decoration:none;
 }
 
 .submenu a:hover i{
@@ -168,6 +171,7 @@ color:white;
 .submenu a.active{
 background:#6e35e8;
 color:white;
+text-decoration:none;
 }
 
 .submenu a.active i{
@@ -350,7 +354,7 @@ text-align:center;
 Tổng hợp
 </div>
 
-<div class="menu-item dropdown" onclick="toggleMenu(this)">
+<div class="menu-item dropdown open" onclick="toggleMenu(this)">
 <span>
 <i class="fa-solid fa-folder-tree"></i>
 Phân loại
@@ -422,9 +426,13 @@ Quy trình Bệnh viện
 /* SIDEBAR */
 
 function toggleMenu(el){
+
 el.classList.toggle("open");
+
 const submenu=el.nextElementSibling;
-submenu.classList.toggle("show");
+
+submenu.classList.toggle("hide");
+
 }
 
 function setActive(el){
