@@ -343,6 +343,34 @@ width:200px;
 text-align:center;
 }
 
+/* NEW STATUS S */
+
+.status-s{
+background:#ea7a00;
+color:white;
+padding:4px 12px;
+border-radius:999px;
+font-size:12.5px;
+font-weight:500;
+display:inline-block;
+position:relative;
+}
+
+.status-s:hover::after{
+content:attr(data-tooltip);
+position:absolute;
+bottom:125%;
+left:50%;
+transform:translateX(-50%);
+background:#374151;
+color:#fff;
+padding:8px 12px;
+border-radius:6px;
+font-size:12px;
+width:220px;
+text-align:center;
+}
+
 </style>
 </head>
 
@@ -427,7 +455,7 @@ Quy trình Bệnh viện
 
 <script>
 
-/* JS giữ nguyên ngoại trừ thêm trạng thái S */
+/* giữ nguyên JS, chỉ thêm trạng thái S */
 
 let allDocs=[];
 let filteredDocs=[];
@@ -457,6 +485,23 @@ let rows=filteredDocs.slice(start,end);
 
 let html="";
 
+if(filteredDocs.length===0){
+
+html=`
+<tr>
+<td colspan="7" style="text-align:center;padding:35px;color:#80848c;font-size:15px;">
+<i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>
+Không tìm thấy dữ liệu nào
+</td>
+</tr>
+`;
+
+document.getElementById("docTable").innerHTML=html;
+document.getElementById("pagination").innerHTML="";
+return;
+
+}
+
 rows.forEach(doc=>{
 
 let status="";
@@ -466,13 +511,17 @@ status=`<span class="status-ok">Còn hiệu lực</span>`;
 }
 
 else if(doc.trangthai==="X"){
+
 let note=doc.ghichu || "Thông tin đang được cập nhật";
+
 status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`;
 }
 
 else if(doc.trangthai==="S"){
-status=`<span class="status-ok">Còn hiệu lực</span>
-<span style="background:#f59e0b;color:white;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:500;display:inline-block;margin-left:6px;">Đã sửa đổi</span>`;
+
+let note=doc.ghichu || "Văn bản này đã được sửa đổi";
+
+status=`<span class="status-s" data-tooltip="${note}">Đã sửa đổi</span>`;
 }
 
 html+=`
