@@ -5,7 +5,6 @@
 
 <meta charset="utf-8">
 <title>Thư viện văn bản đấu thầu</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -63,7 +62,9 @@ color:#374151;
 margin-bottom:25px;
 }
 
-.sidebar a{
+/* MENU ITEM */
+
+.menu-item{
 display:flex;
 align-items:center;
 gap:12px;
@@ -74,37 +75,77 @@ text-decoration:none;
 font-size:17px;
 border-radius:10px;
 font-weight:500;
+cursor:pointer;
+transition:all .2s ease;
 }
 
-.sidebar a i{
+.menu-item i{
 width:20px;
 text-align:center;
 }
 
-.sidebar a:hover{
-background:#ede9fe;
-color:#7c3aed;
-text-decoration:none;
+/* HOVER */
+
+.menu-item:hover{
+background:#6e35e8;
+color:white;
 }
 
-.sidebar a.active{
-background:#e9d5ff;
-color:#7c3aed;
-font-weight:600;
+.menu-item:hover i{
+color:white;
 }
 
-/* SUB MENU */
+/* ACTIVE */
+
+.menu-item.active{
+background:#6e35e8;
+color:white;
+}
+
+.menu-item.active i{
+color:white;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.caret{
+transition:transform .25s ease;
+font-size:13px;
+}
+
+.dropdown.open .caret{
+transform:rotate(90deg);
+}
+
+/* SUBMENU */
 
 .submenu{
 margin-left:18px;
-margin-top:4px;
+overflow:hidden;
+max-height:0;
+transition:max-height .3s ease;
+}
+
+.submenu.show{
+max-height:300px;
 }
 
 .submenu a{
+display:flex;
+align-items:center;
+gap:12px;
 font-size:16px;
 padding:10px 12px;
 border-radius:8px;
-background:transparent;
+color:#374151;
+text-decoration:none;
+transition:all .2s ease;
 }
 
 .submenu a i{
@@ -113,7 +154,12 @@ color:#9ca3af;
 }
 
 .submenu a:hover{
-background:#ede9fe;
+background:#6e35e8;
+color:white;
+}
+
+.submenu a:hover i{
+color:white;
 }
 
 /* CONTENT */
@@ -138,7 +184,6 @@ top:50%;
 transform:translateY(-50%);
 color:#9ca3af;
 font-size:14px;
-transition:color .25s ease;
 }
 
 .searchBox input{
@@ -147,8 +192,8 @@ padding:10px 12px 10px 34px;
 border:1px solid #ddd;
 border-radius:8px;
 font-size:14px;
-transition:all .25s ease;
 background:white;
+transition:.25s;
 }
 
 .searchBox input:hover{
@@ -159,11 +204,6 @@ border-color:#c4b5fd;
 outline:none;
 border-color:#7c3aed;
 box-shadow:0 0 0 3px rgba(124,58,237,.15);
-}
-
-.searchBox input:focus + i,
-.searchBox:focus-within i{
-color:#7c3aed;
 }
 
 /* TABLE */
@@ -181,8 +221,6 @@ border-bottom:1px solid #eee;
 padding:14px;
 text-align:left;
 vertical-align:top;
-overflow-wrap:break-word;
-word-break:normal;
 }
 
 th{
@@ -190,7 +228,7 @@ background:#6e35e8;
 color:white;
 }
 
-/* COLUMN WIDTH */
+/* WIDTH */
 
 th:nth-child(1),td:nth-child(1){width:140px;}
 th:nth-child(2),td:nth-child(2){width:auto;}
@@ -210,21 +248,18 @@ a:hover{
 text-decoration:underline;
 }
 
-/* HOVER ROW */
+/* ROW HOVER */
 
 tbody tr{
 cursor:pointer;
-transition:background .2s ease;
+transition:.2s;
 }
 
 tbody tr:hover{
 background:#f3f4f6;
 }
 
-tbody tr:hover td:nth-child(1),
-tbody tr:hover td:nth-child(2),
-tbody tr:hover td:nth-child(3),
-tbody tr:hover td:nth-child(4){
+tbody tr:hover td:nth-child(-n+4){
 color:#6e35e8;
 }
 
@@ -274,8 +309,6 @@ display:inline-block;
 position:relative;
 }
 
-/* TOOLTIP */
-
 .status-x:hover::after{
 content:attr(data-tooltip);
 position:absolute;
@@ -287,24 +320,8 @@ color:#fff;
 padding:8px 12px;
 border-radius:6px;
 font-size:12px;
-z-index:99;
 width:200px;
-white-space:normal;
-box-shadow:0 4px 12px rgba(0,0,0,.15);
 text-align:center;
-line-height:1.4;
-}
-
-.status-x:hover::before{
-content:"";
-position:absolute;
-bottom:115%;
-left:50%;
-transform:translateX(-50%);
-border-width:5px;
-border-style:solid;
-border-color:#374151 transparent transparent transparent;
-z-index:99;
 }
 
 </style>
@@ -316,39 +333,42 @@ z-index:99;
 
 <h2>📚 Pháp lý đấu thầu</h2>
 
-<a href="#" onclick="filterDocs('all')">
+<div class="menu-item active" onclick="setActive(this);filterDocs('all')">
 <i class="fa-solid fa-layer-group"></i>
 Tổng hợp
-</a>
+</div>
 
-<a>
+<div class="menu-item dropdown" onclick="toggleMenu(this)">
+<span>
 <i class="fa-solid fa-folder-tree"></i>
 Phân loại
-</a>
+</span>
+<i class="fa-solid fa-chevron-right caret"></i>
+</div>
 
 <div class="submenu">
 
-<a href="#" onclick="filterDocs('luat')">
+<a href="#" onclick="setActive(this);filterDocs('luat')">
 <i class="fa-solid fa-scale-balanced"></i>
 Luật
 </a>
 
-<a href="#" onclick="filterDocs('nghidinh')">
+<a href="#" onclick="setActive(this);filterDocs('nghidinh')">
 <i class="fa-solid fa-file-contract"></i>
 Nghị định
 </a>
 
-<a href="#" onclick="filterDocs('thongtu')">
+<a href="#" onclick="setActive(this);filterDocs('thongtu')">
 <i class="fa-solid fa-file-lines"></i>
 Thông tư
 </a>
 
 </div>
 
-<a href="#" onclick="filterDocs('huongdan')">
+<div class="menu-item" onclick="setActive(this);filterDocs('huongdan')">
 <i class="fa-solid fa-book-open"></i>
 Hướng dẫn
-</a>
+</div>
 
 </div>
 
@@ -362,9 +382,7 @@ Hướng dẫn
 </div>
 
 <table>
-
 <thead>
-
 <tr>
 <th>Số ký hiệu</th>
 <th>Trích yếu</th>
@@ -374,11 +392,8 @@ Hướng dẫn
 <th>File Word</th>
 <th>Tệp khác</th>
 </tr>
-
 </thead>
-
 <tbody id="docTable"></tbody>
-
 </table>
 
 <div class="pagination" id="pagination"></div>
@@ -391,6 +406,28 @@ Hướng dẫn
 </div>
 
 <script>
+
+/* SIDEBAR */
+
+function toggleMenu(el){
+
+el.classList.toggle("open");
+
+const submenu=el.nextElementSibling;
+
+submenu.classList.toggle("show");
+
+}
+
+function setActive(el){
+
+document.querySelectorAll(".menu-item").forEach(i=>i.classList.remove("active"));
+
+if(el.classList.contains("menu-item")) el.classList.add("active");
+
+}
+
+/* DATA */
 
 let allDocs=[];
 let filteredDocs=[];
@@ -437,21 +474,13 @@ status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`
 
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}')">
-
-<td>${doc.so || ""}</td>
-
-<td>${doc.ten || ""}</td>
-
-<td>${doc.ngay || ""}</td>
-
-<td>${doc.hieuluc || ""}</td>
-
+<td>${doc.so||""}</td>
+<td>${doc.ten||""}</td>
+<td>${doc.ngay||""}</td>
+<td>${doc.hieuluc||""}</td>
 <td>${status}</td>
-
-<td>${doc.linkword ? `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
-
-<td>${doc.linkkhac ? `<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
-
+<td>${doc.linkword?`<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
+<td>${doc.linkkhac?`<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
 </tr>
 `;
 
@@ -474,9 +503,7 @@ let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
 let html="";
 
 for(let i=1;i<=totalPages;i++){
-
 html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
-
 }
 
 document.getElementById("pagination").innerHTML=html;
@@ -484,22 +511,15 @@ document.getElementById("pagination").innerHTML=html;
 }
 
 function changePage(page){
-
 currentPage=page;
-
 renderTable();
-
 }
 
 function filterDocs(type){
 
-if(type==="all"){
-filteredDocs=allDocs;
-}
+if(type==="all") filteredDocs=allDocs;
 
-else{
-filteredDocs=allDocs.filter(doc=>doc.type===type);
-}
+else filteredDocs=allDocs.filter(doc=>doc.type===type);
 
 currentPage=1;
 
@@ -532,25 +552,13 @@ const code='lytrunghuyen';
 const url=`https://${code}.goatcounter.com/counter/TOTAL.json`;
 
 fetch(url)
-
-.then(response=>response.json())
-
+.then(r=>r.json())
 .then(data=>{
-
-let actualViews=parseInt(data.count.replace(/[^0-9]/g,'')) || 0;
-
-let displayViews=actualViews*5;
-
-document.getElementById("visitor-count").innerText=displayViews.toLocaleString();
-
+let actual=parseInt(data.count.replace(/[^0-9]/g,''))||0;
+document.getElementById("visitor-count").innerText=(actual*5).toLocaleString();
 })
-
-.catch(err=>{
-
-console.error("Lỗi khi lấy lượt xem:",err);
-
+.catch(()=>{
 document.getElementById("visitor-count").innerText="---";
-
 });
 
 });
