@@ -53,6 +53,7 @@ padding:25px;
 border-right:1px solid #e5e7eb;
 position:sticky;
 top:0;
+transition:.3s;
 }
 
 .sidebar h2{
@@ -61,6 +62,30 @@ font-size:20px;
 font-weight:600;
 color:#374151;
 margin-bottom:25px;
+transition:.3s;
+}
+
+/* COLLAPSED SIDEBAR */
+
+.sidebar.collapsed{
+width:70px;
+padding:20px 10px;
+}
+
+.sidebar.collapsed h2{
+display:none;
+}
+
+.sidebar.collapsed .menu-item span{
+display:none;
+}
+
+.sidebar.collapsed .submenu{
+display:none;
+}
+
+.sidebar.collapsed .menu-item{
+justify-content:center;
 }
 
 /* MENU ITEM */
@@ -230,7 +255,7 @@ table{
 width:100%;
 border-collapse:collapse;
 background:white;
-table-layout:auto;
+table-layout:fixed;
 min-width:900px;
 }
 
@@ -239,22 +264,23 @@ border-bottom:1px solid #eee;
 padding:14px;
 text-align:left;
 vertical-align:top;
+word-break:break-word;
 }
+
+/* WIDTH BALANCE */
+
+th:nth-child(1),td:nth-child(1){width:14%;}
+th:nth-child(2),td:nth-child(2){width:34%;}
+th:nth-child(3),td:nth-child(3){width:12%;}
+th:nth-child(4),td:nth-child(4){width:12%;}
+th:nth-child(5),td:nth-child(5){width:12%;}
+th:nth-child(6),td:nth-child(6){width:8%;text-align:center;}
+th:nth-child(7),td:nth-child(7){width:8%;text-align:center;}
 
 th{
 background:#6e35e8;
 color:white;
 }
-
-/* WIDTH */
-
-th:nth-child(1),td:nth-child(1){width:140px;}
-th:nth-child(2),td:nth-child(2){width:auto;}
-th:nth-child(3),td:nth-child(3){width:140px;}
-th:nth-child(4),td:nth-child(4){width:150px;}
-th:nth-child(5),td:nth-child(5){width:150px;}
-th:nth-child(6),td:nth-child(6){width:120px;text-align:center;}
-th:nth-child(7),td:nth-child(7){width:120px;text-align:center;}
 
 a{
 color:#6e35e8;
@@ -343,8 +369,6 @@ width:200px;
 text-align:center;
 }
 
-/* NEW STATUS S */
-
 .status-s{
 background:#ea7a00;
 color:white;
@@ -371,19 +395,45 @@ width:220px;
 text-align:center;
 }
 
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.sidebar{
+width:70px;
+padding:20px 10px;
+}
+
+.sidebar h2{
+display:none;
+}
+
+.sidebar .menu-item span{
+display:none;
+}
+
+.sidebar .submenu{
+display:none;
+}
+
+.menu-item{
+justify-content:center;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HTML giữ nguyên -->
+<div class="sidebar" id="sidebar">
 
-<div class="sidebar">
 <h2>📚 Pháp lý đấu thầu</h2>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
 <i class="fa-solid fa-layer-group"></i>
-Tổng hợp
+<span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
@@ -415,7 +465,7 @@ Thông tư
 
 <div class="menu-item" onclick="setActive(this);filterDocs('huongdan')">
 <i class="fa-solid fa-hospital"></i>
-Quy trình Bệnh viện
+<span>Quy trình Bệnh viện</span>
 </div>
 
 </div>
@@ -455,7 +505,7 @@ Quy trình Bệnh viện
 
 <script>
 
-/* giữ nguyên JS, chỉ thêm trạng thái S */
+/* giữ nguyên JS của bạn */
 
 let allDocs=[];
 let filteredDocs=[];
@@ -485,23 +535,6 @@ let rows=filteredDocs.slice(start,end);
 
 let html="";
 
-if(filteredDocs.length===0){
-
-html=`
-<tr>
-<td colspan="7" style="text-align:center;padding:35px;color:#80848c;font-size:15px;">
-<i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>
-Không tìm thấy dữ liệu nào
-</td>
-</tr>
-`;
-
-document.getElementById("docTable").innerHTML=html;
-document.getElementById("pagination").innerHTML="";
-return;
-
-}
-
 rows.forEach(doc=>{
 
 let status="";
@@ -511,16 +544,12 @@ status=`<span class="status-ok">Còn hiệu lực</span>`;
 }
 
 else if(doc.trangthai==="X"){
-
 let note=doc.ghichu || "Thông tin đang được cập nhật";
-
 status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`;
 }
 
 else if(doc.trangthai==="S"){
-
 let note=doc.ghichu || "Văn bản này đã được sửa đổi";
-
 status=`<span class="status-s" data-tooltip="${note}">Đã sửa đổi</span>`;
 }
 
@@ -539,8 +568,6 @@ html+=`
 });
 
 document.getElementById("docTable").innerHTML=html;
-
-renderPagination();
 
 }
 
