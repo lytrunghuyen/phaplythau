@@ -411,7 +411,7 @@
                 .then(response => response.json())
                 .then(data => {
                     let actualViews = parseInt(data.count.replace(/[^0-9]/g, '')) || 0;
-                    let displayViews = actualViews * 3; 
+                    let displayViews = actualViews * 5; 
                     document.getElementById("visitor-count").innerText = displayViews.toLocaleString();
                 })
                 .catch(err => {
