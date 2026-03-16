@@ -391,6 +391,7 @@ background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 4px 12px rgba(0,0,0,.06);
+display:none;
 }
 
 #pdfViewerSection h2{
@@ -478,6 +479,14 @@ Quy trình Bệnh viện
 </thead>
 <tbody id="docTable"></tbody>
 </table>
+
+<div id="pdfViewerSection">
+<div class="pdfHeader">
+<h2>📄 Xem văn bản</h2>
+<button class="closePDF" onclick="closePDF()">Đóng ✕</button>
+</div>
+<iframe id="pdfViewer" src="" frameborder="0"></iframe>
+</div>
 
 <div class="pagination" id="pagination"></div>
 
@@ -670,11 +679,6 @@ document.getElementById("visitor-count").innerText="---";
 });
 
 </script>
-
-<div id="pdfViewerSection">
-<h2>📄 Xem văn bản</h2>
-<iframe id="pdfViewer" src="" frameborder="0"></iframe>
-</div>
 
 </body>
 </html>
