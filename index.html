@@ -661,6 +661,11 @@ function closePDF(){
 const viewer=document.getElementById("pdfViewer");
 viewer.src="";
 document.getElementById("pdfViewerSection").style.display="none";
+/* bỏ highlight dòng */
+document.querySelectorAll("#docTable tr").forEach(tr=>{
+tr.classList.remove("activeRow");
+});
+
 }
   
 function renderPagination(){
