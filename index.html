@@ -26,6 +26,7 @@ margin:0;
 display:flex;
 background:#f8f9fb;
 line-height:1.4;
+font-size:15px;
 }
 
 /* VIEW COUNTER */
@@ -75,7 +76,7 @@ margin-bottom:6px;
 color:#374151;
 font-size:16px;   /* trước là 17px */
 border-radius:10px;
-font-weight:500;
+font-weight:600;
 cursor:pointer;
 transition:background-color .18s ease,color .18s ease;
 }
@@ -128,7 +129,7 @@ font-size:13px;
 transform:rotate(90deg);
 }
 
-/* SUBMENU */
+/* SUBMENU - Menu Phân loại */
 
 .submenu{
 margin-left:18px;
@@ -141,11 +142,12 @@ transition:max-height .28s ease;
 max-height:0;
 }
 
-.submenu a{
+.submenu a{  
 display:flex;
 align-items:center;
 gap:12px;
-font-size:15px;   /* trước là 16px */
+font-size:15px;
+font-weight:500;
 padding:10px 12px;
 border-radius:8px;
 color:#374151;
@@ -240,7 +242,7 @@ border-collapse:collapse;
 background:white;
 table-layout:fixed;
 min-width:900px;
-font-size:13px;
+font-size:14px;
 }
 
 th,td{
@@ -465,7 +467,7 @@ if(el.tagName==="A") el.classList.add("active");
 let allDocs=[];
 let filteredDocs=[];
 let currentPage=1;
-const rowsPerPage=25;
+const rowsPerPage=20;
 
 function parseDate(dateStr){
 if(!dateStr)return new Date(0);
