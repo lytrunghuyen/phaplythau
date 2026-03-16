@@ -446,7 +446,97 @@ height:800px;
 border:1px solid #e5e7eb;
 border-radius:8px;
 }
+  
+/* PDF POPUP */
 
+#pdfModal{
+display:none;
+position:fixed;
+z-index:1000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+justify-content:center;
+align-items:center;
+opacity:0;
+transition:opacity .25s ease;
+}
+
+#pdfModal.show{
+display:flex;
+opacity:1;
+}
+
+.pdfModalContent{
+background:white;
+width:85%;
+height:85%;
+border-radius:10px;
+padding:15px;
+display:flex;
+flex-direction:column;
+box-shadow:0 15px 50px rgba(0,0,0,0.3);
+transform:scale(.92);
+transition:transform .25s ease;
+}
+
+#pdfModal.show .pdfModalContent{
+transform:scale(1);
+}
+
+.pdfModalHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.pdfModalHeader h2{
+margin:0;
+font-size:18px;
+}
+
+.pdfButtons{
+display:flex;
+gap:8px;
+}
+
+.closePDF,
+.fullscreenPDF{
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+.closePDF{
+background:#ef4444;
+color:white;
+}
+
+.closePDF:hover{
+background:#dc2626;
+}
+
+.fullscreenPDF{
+background:#6e35e8;
+color:white;
+}
+
+.fullscreenPDF:hover{
+background:#5b28c9;
+}
+
+#pdfViewer{
+flex:1;
+width:100%;
+border:1px solid #e5e7eb;
+border-radius:8px;
+}
+  
 </style>
 </head>
 
@@ -519,23 +609,6 @@ Quy trình Bệnh viện
 </thead>
 <tbody id="docTable"></tbody>
 </table>
-
-<div id="pdfViewerSection">
-<div class="pdfHeader">
-<h2>📄 Xem văn bản</h2>
-<button class="closePDF" onclick="closePDF()">Đóng ✕</button>
-</div>
-<iframe id="pdfViewer" src="" frameborder="0"></iframe>
-</div>
-
-<div class="pagination" id="pagination"></div>
-
-</div>
-
-<div class="viewCounter">
-<i class="fa-solid fa-eye"></i>
-<span id="visitor-count">0</span> lượt truy cập
-</div>
 
 <script>
 
@@ -636,36 +709,36 @@ ${doc.linkword?
 });
 
 document.getElementById("docTable").innerHTML=html;
-
 renderPagination();
-
 }
+  
 function openPDF(url,row){
 if(!url) return;
 url=url.replace("/view","/preview");
 const viewer=document.getElementById("pdfViewer");
 viewer.src=url;
-/* bỏ highlight các dòng khác */
+  
+/* highlight row */
+  
 document.querySelectorAll("#docTable tr").forEach(tr=>{
 tr.classList.remove("activeRow");
 });
-/* highlight dòng đang xem */
 row.classList.add("activeRow");
-document.getElementById("pdfViewerSection").style.display="block";
-document.getElementById("pdfViewerSection").scrollIntoView({
-behavior:"smooth"
-});
+/* mở popup */
+
+document.getElementById("pdfModal").classList.add("show");
 }
   
 function closePDF(){
 const viewer=document.getElementById("pdfViewer");
 viewer.src="";
-document.getElementById("pdfViewerSection").style.display="none";
-/* bỏ highlight dòng */
+document.getElementById("pdfModal").style.display="none";
+
+/* bỏ highlight */
+
 document.querySelectorAll("#docTable tr").forEach(tr=>{
 tr.classList.remove("activeRow");
 });
-
 }
   
 function renderPagination(){
@@ -736,6 +809,20 @@ document.getElementById("visitor-count").innerText="---";
 });
 
 </script>
+<div id="pdfModal" onclick="closePDF(event)">
+<div class="pdfModalContent">
+<div class="pdfModalHeader">
+  
+<h2>📄 Xem văn bản</h2>
 
+<div class="pdfButtons">
+<button class="fullscreenPDF" onclick="fullscreenPDF()">Toàn màn hình</button>
+<button class="closePDF" onclick="closePDF()">Đóng ✕</button>
+</div>
+</div>
+<iframe id="pdfViewer" src="" frameborder="0"></iframe>
+</div>
+</div>
+  
 </body>
 </html>
