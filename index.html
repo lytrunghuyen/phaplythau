@@ -84,6 +84,7 @@ padding:25px;
 border-right:1px solid #e5e7eb;
 position:sticky;
 top:0;
+transition:width .25s ease;
 }
 
 .sidebar h2{
@@ -657,36 +658,35 @@ color:#1E5DFE;
 
 /* Sidebar collapsed */
 
-.sidebar.collapsed{
+@media (max-width:900px){
+
+.sidebar{
 width:70px;
 padding:20px 10px;
 }
 
-.sidebar.collapsed h2{
+.sidebar h2{
 display:none;
 }
 
-.sidebar.collapsed .menu-item span{
+.sidebar .menu-item span{
 display:none;
 }
 
-.sidebar.collapsed .submenu{
+.sidebar .submenu{
 display:none;
 }
 
-.sidebar.collapsed .menu-item{
+.sidebar .menu-item{
 justify-content:center;
 }
 
-.sidebar.collapsed .menu-item i{
+.sidebar .menu-item i{
 margin:0;
 }
 
-/* content full width */
-
-.sidebar.collapsed + .content{
-margin-left:0;
 }
+
 
 </style>
 </head>
@@ -720,12 +720,12 @@ Phân loại
 <span>Luật</span>
 </a>
 
-<a href="#" onclick="setActive(this);filterDocs('luat')">
+<a href="#" onclick="setActive(this);filterDocs('Nghị định')">
 <i class="fa-solid fa-scale-balanced"></i>
 <span>Nghị định</span>
 </a>
 
-<a href="#" onclick="setActive(this);filterDocs('luat')">
+<a href="#" onclick="setActive(this);filterDocs('Thông tư')">
 <i class="fa-solid fa-scale-balanced"></i>
 <span>Thông tư</span>
 </a>
@@ -801,6 +801,10 @@ document.querySelectorAll(".submenu a").forEach(i=>i.classList.remove("active"))
 if(el.classList.contains("menu-item")) el.classList.add("active");
 if(el.tagName==="A") el.classList.add("active");
 
+}
+  
+function toggleSidebar(){
+document.querySelector(".sidebar").classList.toggle("collapsed");
 }
 
 /* DATA */
