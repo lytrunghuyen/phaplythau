@@ -736,6 +736,8 @@ let endItem=Math.min(end, filteredDocs.length);
 document.getElementById("pageInfo").innerText=
 `Hiển thị ${startItem}-${endItem} / ${filteredDocs.length} văn bản`;
 renderPagination();
+
+}
   
 function openPDF(url,row){
 if(!url) return;
