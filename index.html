@@ -372,13 +372,27 @@ white-space:nowrap;
 }
 
 /* Icon Word - Cột File */
+
+.file-link{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:6px 10px;   /* tăng vùng click */
+border-radius:6px;
+transition:.2s;
+}
+
+.file-link:hover{
+background:#ede9fe;   /* nền tím nhạt khi hover */
+}
+
 .file-icon{
 font-size:20px;
 color:#6b7280;
 transition:.2s;
 }
 
-td a:hover .file-icon{
+.file-link:hover .file-icon{
 color:#6e35e8;
 transform:scale(1.1);
 }
