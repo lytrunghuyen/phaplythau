@@ -296,7 +296,21 @@ background:#6e35e8;
 color:white;
 font-weight:600;
 }
+  
+.tableFooter{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:20px;
+flex-wrap:wrap;
+gap:10px;
+}
 
+.pageInfo{
+font-size:13px;
+color:#6b7280;
+}
+  
 /* WIDTH - Độ rộng cột phần nội dung*/
 
 th:nth-child(1),td:nth-child(1){width:4%;text-align:center;}   /* STT */
@@ -609,6 +623,14 @@ Quy trình Bệnh viện
 </thead>
 <tbody id="docTable"></tbody>
 </table>
+  
+<div class="tableFooter">
+
+<div class="pageInfo" id="pageInfo"></div>
+
+<div class="pagination" id="pagination"></div>
+
+</div>
 
 <script>
 
@@ -709,8 +731,11 @@ ${doc.linkword?
 });
 
 document.getElementById("docTable").innerHTML=html;
+let startItem=start+1;
+let endItem=Math.min(end, filteredDocs.length);
+document.getElementById("pageInfo").innerText=
+`Hiển thị ${startItem}-${endItem} / ${filteredDocs.length} văn bản`;
 renderPagination();
-}
   
 function openPDF(url,row){
 if(!url) return;
