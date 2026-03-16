@@ -411,26 +411,7 @@ td a:hover .file-icon{
 color:#6e35e8;
 transform:scale(1.1);
 }
-
-/* ROW ARROW INDICATOR */
-
-tbody tr{
-position:relative;
-}
-
-tbody tr.activeRow::before{
-content:"";
-position:absolute;
-left:-12px;
-top:50%;
-transform:translateY(-50%);
-width:0;
-height:0;
-border-top:6px solid transparent;
-border-bottom:6px solid transparent;
-border-left:8px solid #6e35e8;
-}
-
+  
 /* PDF VIEWER */
 
 #pdfViewerSection{
@@ -462,7 +443,7 @@ border-radius:8px;
 
 <div class="sidebar">
 
-<h2>Pháp lý đấu thầu</h2>
+<h2>📚 Pháp lý đấu thầu</h2>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
 <i class="fa-solid fa-layer-group"></i>
@@ -615,7 +596,7 @@ status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`
 }
 
 html+=`
-<tr onclick="openPDF('${doc.linkpdf}', this)">
+<tr onclick="openPDF('${doc.linkpdf}')">
 
 <td>${stt}</td>
 
@@ -648,7 +629,7 @@ document.getElementById("docTable").innerHTML=html;
 renderPagination();
 
 }
-function openPDF(url,row){
+function openPDF(url){
 if(!url) return;
 url=url.replace("/view","/preview");
 const viewer=document.getElementById("pdfViewer");
@@ -657,11 +638,6 @@ document.getElementById("pdfViewerSection").style.display="block";
 document.getElementById("pdfViewerSection").scrollIntoView({
 behavior:"smooth"
 });
-document.querySelectorAll("#docTable tr").forEach(tr=>{
-tr.classList.remove("activeRow");
-});
-
-row.classList.add("activeRow");
 }
   
 function closePDF(){
