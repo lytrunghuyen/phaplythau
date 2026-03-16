@@ -234,7 +234,7 @@ margin-bottom:15px;
 position:relative;
 }
 
-.searchBox i{
+.searchBox .fa-magnifying-glass{
 position:absolute;
 left:12px;
 top:50%;
@@ -245,22 +245,24 @@ font-size:14px;
 
 .clearSearch{
 position:absolute;
-right:10px;
+right:12px;
 top:50%;
 transform:translateY(-50%);
-font-size:14px;
+font-size:18px;
 color:#9ca3af;
 cursor:pointer;
 display:none;
+transition:.2s;
 }
 
 .clearSearch:hover{
-color:#ef4444;
+color:#6b7280;
+transform:translateY(-50%) scale(1.1);
 }
   
 .searchBox input{
 width:300px;
-padding:10px 12px 10px 34px;
+padding:10px 34px 10px 34px;
 border:1px solid #ddd;
 border-radius:8px;
 font-size:14px;
