@@ -382,6 +382,29 @@ td a:hover .file-icon{
 color:#6e35e8;
 transform:scale(1.1);
 }
+  
+/* PDF VIEWER */
+
+#pdfViewerSection{
+margin-top:40px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+
+#pdfViewerSection h2{
+margin-top:0;
+font-size:22px;
+color:#374151;
+}
+
+#pdfViewer{
+width:100%;
+height:800px;
+border:1px solid #e5e7eb;
+border-radius:8px;
+}
 
 </style>
 </head>
@@ -570,7 +593,12 @@ renderPagination();
 }
 
 function openPDF(url){
-if(url)window.open(url,"_blank");
+if(!url) return;
+const viewer=document.getElementById("pdfViewer");
+viewer.src=url;
+document.getElementById("pdfViewerSection").scrollIntoView({
+behavior:"smooth"
+});
 }
 
 function renderPagination(){
@@ -641,6 +669,11 @@ document.getElementById("visitor-count").innerText="---";
 });
 
 </script>
+
+<div id="pdfViewerSection">
+<h2>📄 Xem văn bản</h2>
+<iframe id="pdfViewer" src="" frameborder="0"></iframe>
+</div>
 
 </body>
 </html>
