@@ -591,11 +591,12 @@ document.getElementById("docTable").innerHTML=html;
 renderPagination();
 
 }
-
 function openPDF(url){
 if(!url) return;
+url=url.replace("/view","/preview");
 const viewer=document.getElementById("pdfViewer");
 viewer.src=url;
+document.getElementById("pdfViewerSection").style.display="block";
 document.getElementById("pdfViewerSection").scrollIntoView({
 behavior:"smooth"
 });
