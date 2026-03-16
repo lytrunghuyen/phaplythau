@@ -636,8 +636,58 @@ border:1px solid #e5e7eb;
 border-radius:8px;
 }
 
+/* Sidebar header */
 
-  
+.sidebarHeader{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:25px;
+}
+
+.toggleSidebar{
+cursor:pointer;
+font-size:18px;
+color:#6b7280;
+}
+
+.toggleSidebar:hover{
+color:#1E5DFE;
+}
+
+/* Sidebar collapsed */
+
+.sidebar.collapsed{
+width:70px;
+padding:20px 10px;
+}
+
+.sidebar.collapsed h2{
+display:none;
+}
+
+.sidebar.collapsed .menu-item span{
+display:none;
+}
+
+.sidebar.collapsed .submenu{
+display:none;
+}
+
+.sidebar.collapsed .menu-item{
+justify-content:center;
+}
+
+.sidebar.collapsed .menu-item i{
+margin:0;
+}
+
+/* content full width */
+
+.sidebar.collapsed + .content{
+margin-left:0;
+}
+
 </style>
 </head>
 
@@ -645,7 +695,10 @@ border-radius:8px;
 
 <div class="sidebar">
 
+<div class="sidebarHeader">
 <h2>📚 Pháp lý đấu thầu</h2>
+<i class="fa-solid fa-bars toggleSidebar" onclick="toggleSidebar()"></i>
+</div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
 <i class="fa-solid fa-layer-group"></i>
