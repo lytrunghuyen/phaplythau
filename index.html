@@ -44,7 +44,36 @@ box-shadow:0 2px 8px rgba(124,58,237,.12);
 border:1px solid rgba(124,58,237,.08);
 z-index:999;
 }
+  
+#pdfViewer{
+width:100%;
+height:800px;
+border:1px solid #e5e7eb;
+border-radius:8px;
+}
 
+/* PDF HEADER */
+
+.pdfHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.closePDF{
+background:#ef4444;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+.closePDF:hover{
+background:#dc2626;
+}
 /* SIDEBAR */
 
 .sidebar{
@@ -610,7 +639,13 @@ document.getElementById("pdfViewerSection").scrollIntoView({
 behavior:"smooth"
 });
 }
-
+  
+function closePDF(){
+const viewer=document.getElementById("pdfViewer");
+viewer.src="";
+document.getElementById("pdfViewerSection").style.display="none";
+}
+  
 function renderPagination(){
 
 let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
