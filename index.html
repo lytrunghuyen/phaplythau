@@ -455,10 +455,27 @@ color:#fff;
 padding:8px 12px;
 border-radius:6px;
 font-size:12px;
-width:200px;
-text-align:center;
+
+max-width:260px;
+width:max-content;
+
+white-space:normal;
+line-height:1.4;
+
+text-align:left;
+z-index:100;
 }
   
+.status-x:hover::before,
+.status-edit:hover::before{
+content:"";
+position:absolute;
+bottom:115%;
+left:50%;
+transform:translateX(-50%);
+border:6px solid transparent;
+border-top-color:#374151;
+}
 .status-ok,
 .status-x{
 white-space:nowrap;
