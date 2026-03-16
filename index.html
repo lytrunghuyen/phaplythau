@@ -243,6 +243,21 @@ color:#9ca3af;
 font-size:14px;
 }
 
+.clearSearch{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+font-size:14px;
+color:#9ca3af;
+cursor:pointer;
+display:none;
+}
+
+.clearSearch:hover{
+color:#ef4444;
+}
+  
 .searchBox input{
 width:300px;
 padding:10px 12px 10px 34px;
@@ -658,7 +673,11 @@ Quy trình Bệnh viện
 
 <div class="searchBox">
 <i class="fa-solid fa-magnifying-glass"></i>
-<input type="text" placeholder="Tìm số hoặc tên văn bản..." onkeyup="searchDocs(this.value)">
+<input id="searchInput"
+type="text"
+placeholder="Tìm số hoặc tên văn bản..."
+onkeyup="searchDocs(this.value);toggleClearBtn()">
+<i class="fa-solid fa-xmark clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -839,25 +858,18 @@ viewer.src="";
 document.getElementById("pdfModal").classList.remove("show");
 
 /* bỏ highlight */
-
 document.querySelectorAll("#docTable tr").forEach(tr=>{
 tr.classList.remove("activeRow");
 });
-
 }
   
 function renderPagination(){
-
 let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
-
 let html="";
-
 for(let i=1;i<=totalPages;i++){
 html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
 }
-
 document.getElementById("pagination").innerHTML=html;
-
 }
 
 function changePage(page){
@@ -866,33 +878,36 @@ renderTable();
 }
 
 function filterDocs(type){
-
 if(type==="all") filteredDocs=allDocs;
-
 else filteredDocs=allDocs.filter(doc=>doc.type===type);
-
 currentPage=1;
-
 renderTable();
-
 }
 
 function searchDocs(keyword){
-
 keyword=keyword.toLowerCase();
-
 filteredDocs=allDocs.filter(doc=>
-
 (doc.so && doc.so.toLowerCase().includes(keyword)) ||
-
 (doc.ten && doc.ten.toLowerCase().includes(keyword))
-
 );
-
 currentPage=1;
-
 renderTable();
+}
 
+function toggleClearBtn(){
+const input=document.getElementById("searchInput");
+const btn=document.querySelector(".clearSearch");
+btn.style.display=input.value ? "block" : "none";
+}
+  
+function clearSearch(){
+const input=document.getElementById("searchInput");
+input.value="";
+toggleClearBtn();
+filteredDocs=allDocs;
+currentPage=1;
+renderTable();
+input.focus();
 }
 
 window.addEventListener("load",function(){
