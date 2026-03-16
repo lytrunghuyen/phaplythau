@@ -714,7 +714,7 @@ renderPagination();
   
 function openPDF(url,row){
 if(!url) return;
-url=url.replace("/view","/preview?rm=minimal");
+url=url.replace("/view","/preview");
 const viewer=document.getElementById("pdfViewer");
 viewer.src=url;
   
