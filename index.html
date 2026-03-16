@@ -245,13 +245,17 @@ min-width:900px;
 font-size:14px;
 }
 
-th,td{
-border-bottom:1px solid #eee;
-padding:10px 6px;
-text-align:left;
-vertical-align:top;
-word-wrap:break-word;
-overflow-wrap:break-word;
+/* Padding cho nội dung các dòng dữ liệu */
+td {
+    padding: 10px 6px; 
+    vertical-align: middle; /* Căn giữa theo chiều dọc để text đẹp hơn */
+}
+
+/* Padding riêng cho hàng tiêu đề */
+th {
+    padding: 15px 8px; /* Tăng từ 8px lên 15px để tiêu đề rộng ra */
+    font-size: 13px;
+    letter-spacing: 0.5px;
 }
 
 td:nth-child(3){
