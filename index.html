@@ -273,6 +273,14 @@ table-layout:auto;
 min-width:900px;
 font-size:14px;
 }
+  
+.tableCard{
+background:white;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.06);
+overflow:hidden;
+border:1px solid #eee;
+}
 
 /* Padding cho nội dung các dòng dữ liệu */
 td {
@@ -340,7 +348,7 @@ transition:.2s;
 }
 
 tbody tr:hover{
-background:#f3f4f6;
+background:#f8f7ff;
 box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
 
@@ -550,6 +558,8 @@ width:100%;
 border:1px solid #e5e7eb;
 border-radius:8px;
 }
+
+
   
 </style>
 </head>
@@ -622,7 +632,9 @@ Quy trình Bệnh viện
 </tr>
 </thead>
 <tbody id="docTable"></tbody>
+<div class="tableCard">
 </table>
+</div>
   
 <div class="tableFooter">
 
