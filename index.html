@@ -417,14 +417,13 @@ Quy trình Bệnh viện
 <table>
 <thead>
 <tr>
-<th>STT</th>
 <th>Số ký hiệu</th>
 <th>Trích yếu</th>
 <th>Ngày ban hành</th>
 <th>Ngày hiệu lực</th>
-<th>Cơ quan ban hành</th>
 <th>Trạng thái</th>
 <th>Files</th>
+<th>Tệp khác</th>
 </tr>
 </thead>
 <tbody id="docTable"></tbody>
@@ -484,6 +483,8 @@ filteredDocs=allDocs;
 renderTable();
 });
 
+function renderTable(){
+
 let start=(currentPage-1)*rowsPerPage;
 let end=start+rowsPerPage;
 
@@ -491,9 +492,7 @@ let rows=filteredDocs.slice(start,end);
 
 let html="";
 
-rows.forEach((doc,index)=>{
-
-let stt=start+index+1;
+rows.forEach(doc=>{
 
 let status="";
 
@@ -510,28 +509,13 @@ status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`
 
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}')">
-
-<td>${stt}</td>
-
 <td>${doc.so||""}</td>
-
 <td>${doc.ten||""}</td>
-
 <td>${doc.ngay||""}</td>
-
 <td>${doc.hieuluc||""}</td>
-
-<td>${doc.coquan||""}</td>
-
 <td>${status}</td>
-
-<td>
-${doc.linkword ?
-`<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="fa-solid fa-file-word" style="font-size:20px;color:#6b7280;"></i>
-</a>`:""}
-</td>
-
+<td>${doc.linkword?`<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
+<td>${doc.linkkhac?`<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
 </tr>
 `;
 
