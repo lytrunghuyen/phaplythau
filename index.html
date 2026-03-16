@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 
@@ -74,7 +75,7 @@ gap:12px;
 padding:12px 14px;
 margin-bottom:6px;
 color:#374151;
-font-size:16px;   /* trước là 17px */
+font-size:16px;
 border-radius:10px;
 font-weight:600;
 cursor:pointer;
@@ -129,7 +130,7 @@ font-size:13px;
 transform:rotate(90deg);
 }
 
-/* SUBMENU - Menu Phân loại */
+/* SUBMENU */
 
 .submenu{
 margin-left:18px;
@@ -142,7 +143,7 @@ transition:max-height .28s ease;
 max-height:0;
 }
 
-.submenu a{  
+.submenu a{
 display:flex;
 align-items:center;
 gap:12px;
@@ -184,7 +185,7 @@ color:white;
 }
 
 /* CONTENT */
-  
+
 .content h1{
 font-size:30px;
 font-weight:600;
@@ -262,22 +263,24 @@ font-weight:600;
 
 /* WIDTH */
 
-th:nth-child(1),td:nth-child(1){width:10%;}
-th:nth-child(2),td:nth-child(2){width:42%;}
-th:nth-child(3),td:nth-child(3){width:12%;}
-th:nth-child(4),td:nth-child(4){width:12%;}
-th:nth-child(5),td:nth-child(5){width:12%;}
-th:nth-child(6),td:nth-child(6){width:6%;text-align:center;}
-th:nth-child(7),td:nth-child(7){width:6%;text-align:center;}
+th:nth-child(1),td:nth-child(1){width:6%;text-align:center;}
+th:nth-child(2),td:nth-child(2){width:12%;}
+th:nth-child(3),td:nth-child(3){width:38%;}
+th:nth-child(4),td:nth-child(4){width:10%;}
+th:nth-child(5),td:nth-child(5){width:10%;}
+th:nth-child(6),td:nth-child(6){width:12%;}
+th:nth-child(7),td:nth-child(7){width:7%;text-align:center;}
+th:nth-child(8),td:nth-child(8){width:5%;text-align:center;}
 
-a{
-color:#6e35e8;
-text-decoration:none;
-font-weight:500;
+.word-icon{
+font-size:20px;
+color:#6b7280;
+transition:.2s;
 }
 
-a:hover{
-text-decoration:underline;
+.word-icon:hover{
+color:#6e35e8;
+transform:scale(1.1);
 }
 
 /* ROW HOVER */
@@ -292,7 +295,7 @@ background:#f3f4f6;
 box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
 
-tbody tr:hover td:nth-child(-n+4){
+tbody tr:hover td:nth-child(-n+5){
 color:#6e35e8;
 }
 
@@ -358,6 +361,7 @@ text-align:center;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -417,13 +421,14 @@ Quy trình Bệnh viện
 <table>
 <thead>
 <tr>
+<th>STT</th>
 <th>Số ký hiệu</th>
 <th>Trích yếu</th>
 <th>Ngày ban hành</th>
 <th>Ngày hiệu lực</th>
+<th>Cơ quan ban hành</th>
 <th>Trạng thái</th>
 <th>Files</th>
-<th>Tệp khác</th>
 </tr>
 </thead>
 <tbody id="docTable"></tbody>
@@ -439,30 +444,6 @@ Quy trình Bệnh viện
 </div>
 
 <script>
-
-/* SIDEBAR */
-
-function toggleMenu(el){
-
-el.classList.toggle("open");
-
-const submenu=el.nextElementSibling;
-
-submenu.classList.toggle("hide");
-
-}
-
-function setActive(el){
-
-document.querySelectorAll(".menu-item").forEach(i=>i.classList.remove("active"));
-document.querySelectorAll(".submenu a").forEach(i=>i.classList.remove("active"));
-
-if(el.classList.contains("menu-item")) el.classList.add("active");
-if(el.tagName==="A") el.classList.add("active");
-
-}
-
-/* DATA */
 
 let allDocs=[];
 let filteredDocs=[];
@@ -492,7 +473,9 @@ let rows=filteredDocs.slice(start,end);
 
 let html="";
 
-rows.forEach(doc=>{
+rows.forEach((doc,index)=>{
+
+let stt=start+index+1;
 
 let status="";
 
@@ -501,24 +484,26 @@ status=`<span class="status-ok">Còn hiệu lực</span>`;
 }
 
 else if(doc.trangthai==="X"){
-
 let note=doc.ghichu || "Thông tin đang được cập nhật";
-
 status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`;
 }
 
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}')">
+<td>${stt}</td>
 <td>${doc.so||""}</td>
 <td>${doc.ten||""}</td>
 <td>${doc.ngay||""}</td>
 <td>${doc.hieuluc||""}</td>
+<td>${doc.coquan||""}</td>
 <td>${status}</td>
-<td>${doc.linkword?`<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
-<td>${doc.linkkhac?`<a href="${doc.linkkhac}" target="_blank" onclick="event.stopPropagation();"><i class="fa-solid fa-eye"></i> Xem</a>`:""}</td>
+<td>
+${doc.linkword?`<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
+<i class="fa-solid fa-file-word word-icon"></i>
+</a>`:""}
+</td>
 </tr>
 `;
-
 });
 
 document.getElementById("docTable").innerHTML=html;
@@ -553,11 +538,9 @@ renderTable();
 function filterDocs(type){
 
 if(type==="all") filteredDocs=allDocs;
-
 else filteredDocs=allDocs.filter(doc=>doc.type===type);
 
 currentPage=1;
-
 renderTable();
 
 }
@@ -567,36 +550,14 @@ function searchDocs(keyword){
 keyword=keyword.toLowerCase();
 
 filteredDocs=allDocs.filter(doc=>
-
 (doc.so && doc.so.toLowerCase().includes(keyword)) ||
-
 (doc.ten && doc.ten.toLowerCase().includes(keyword))
-
 );
 
 currentPage=1;
-
 renderTable();
 
 }
-
-window.addEventListener("load",function(){
-
-const code='lytrunghuyen';
-
-const url=`https://${code}.goatcounter.com/counter/TOTAL.json`;
-
-fetch(url)
-.then(r=>r.json())
-.then(data=>{
-let actual=parseInt(data.count.replace(/[^0-9]/g,''))||0;
-document.getElementById("visitor-count").innerText=(actual*5).toLocaleString();
-})
-.catch(()=>{
-document.getElementById("visitor-count").innerText="---";
-});
-
-});
 
 </script>
 
