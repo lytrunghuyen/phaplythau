@@ -345,10 +345,17 @@ text-decoration:underline;
 tbody tr{
 cursor:pointer;
 transition:.2s;
+border-bottom:1px solid #f1f1f1;
+}
+
+/* zebra row */
+
+tbody tr:nth-child(even){
+background:#fafafa;
 }
 
 tbody tr:hover{
-background:#f8f7ff;
+background:#f3f0ff;
 box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
 
