@@ -730,19 +730,19 @@ document.getElementById("pdfModal").classList.add("show");
 }
   
 function closePDF(){
+
 const viewer=document.getElementById("pdfViewer");
+
 viewer.src="";
+
 document.getElementById("pdfModal").classList.remove("show");
-document.querySelectorAll("#docTable tr").forEach(tr=>{
-tr.classList.remove("activeRow");
-});
-}
 
 /* bỏ highlight */
 
 document.querySelectorAll("#docTable tr").forEach(tr=>{
 tr.classList.remove("activeRow");
 });
+
 }
   
 function renderPagination(){
