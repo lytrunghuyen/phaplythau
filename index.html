@@ -371,6 +371,18 @@ text-align:center;
 white-space:nowrap;
 }
 
+/* Icon Word - Cột File */
+.file-icon{
+font-size:20px;
+color:#6b7280;
+transition:.2s;
+}
+
+td a:hover .file-icon{
+color:#6e35e8;
+transform:scale(1.1);
+}
+
 </style>
 </head>
 
@@ -542,7 +554,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="fa-solid fa-file-word" style="font-size:20px;color:#6b7280;"></i>
+<i class="fa-solid fa-file-word file-icon"></i>
 </a>`
 :""}
 </td>
