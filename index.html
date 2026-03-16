@@ -334,6 +334,17 @@ tbody tr:hover td:nth-child(-n+4){
 color:#6e35e8;
 }
 
+/* giữ hover khi đang xem PDF */
+
+tbody tr.activeRow{
+background:#f3f4f6;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+tbody tr.activeRow td:nth-child(-n+4){
+color:#6e35e8;
+}
+
 /* PAGINATION */
 
 .pagination{
@@ -596,7 +607,7 @@ status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`
 }
 
 html+=`
-<tr onclick="openPDF('${doc.linkpdf}')">
+<tr onclick="openPDF('${doc.linkpdf}', this)">
 
 <td>${stt}</td>
 
@@ -629,11 +640,17 @@ document.getElementById("docTable").innerHTML=html;
 renderPagination();
 
 }
-function openPDF(url){
+function openPDF(url,row){
 if(!url) return;
 url=url.replace("/view","/preview");
 const viewer=document.getElementById("pdfViewer");
 viewer.src=url;
+/* bỏ highlight các dòng khác */
+document.querySelectorAll("#docTable tr").forEach(tr=>{
+tr.classList.remove("activeRow");
+});
+/* highlight dòng đang xem */
+row.classList.add("activeRow");
 document.getElementById("pdfViewerSection").style.display="block";
 document.getElementById("pdfViewerSection").scrollIntoView({
 behavior:"smooth"
