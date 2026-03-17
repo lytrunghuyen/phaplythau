@@ -1066,12 +1066,16 @@ document.getElementById("pagination").innerHTML=html;
 
 function changePage(page){
 let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
-
 if(page<1) page=1;
 if(page>totalPages) page=totalPages;
-
 currentPage=page;
 renderTable();
+
+/* 👉 thêm đoạn này */
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 }
 
 function filterDocs(type){
