@@ -909,11 +909,8 @@ fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/She
 .then(res=>res.json())
 .then(data=>{
     allDocs = data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
-    filteredDocs = allDocs;
-
-    // ✅ THÊM DÒNG NÀY
+    filteredDocs = allDocs.filter(doc => doc.type !== "huongdan");
     document.getElementById("totalDocs").innerText = allDocs.length;
-
     renderTable();
 })
 .catch(err=>{
