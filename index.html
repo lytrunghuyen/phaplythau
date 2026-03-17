@@ -1091,8 +1091,13 @@ behavior:"smooth"
 }
 
 function filterDocs(type){
-if(type==="all") filteredDocs=allDocs;
-else filteredDocs=allDocs.filter(doc=>doc.type===type);
+if(type==="all"){
+    // ❌ loại bỏ "huongdan"
+    filteredDocs = allDocs.filter(doc => doc.type !== "huongdan");
+}
+else{
+    filteredDocs = allDocs.filter(doc => doc.type === type);
+}
 currentPage=1;
 renderTable();
 }
