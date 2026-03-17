@@ -934,43 +934,43 @@ font-weight:600;
 <div class="sidebar">
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i class="ph-light ph-caret-left toggleBtn" onclick="toggleSidebar()"></i>
+  <i class="ph ph-caret-left toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i class="ph-light ph-squares-four"></i>
+<i class="ph ph-squares-four"></i>
 <span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
 <span>
-<i class="ph-light ph-caret-right caret"></i>
+<i class="ph ph-tree-structure"></i>
 Phân loại
 </span>
-<i class="ph-light ph-caret-right caret"></i>
+<i class="ph ph-caret-right caret"></i>
 </div>
 
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i class="ph-light ph-scales"></i>
+<i class="ph ph-scales"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i class="ph-light ph-buildings"></i>
+<i class="ph ph-buildings"></i>
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i class="ph-light ph-file-text"></i>
+<i class="ph ph-file-text"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i class="ph-light ph-hospital"></i>
+<i class="ph ph-hospital"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
@@ -987,12 +987,12 @@ Phân loại
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i class="ph-light ph-magnifying-glass"></i>
+<i class="ph ph-magnifying-glass"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
 onkeyup="searchDocs(this.value);toggleClearBtn()">
-<i class="ph-light ph-x clearSearch" onclick="clearSearch()"></i>
+<i class="ph ph-x clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -1106,7 +1106,7 @@ if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
 `<tr class="noDataRow">
 <td colspan="8" class="noData">
-<i class="ph-light ph-magnifying-glass"></i>
+<i class="ph ph-magnifying-glass"></i>
  Không tìm thấy dữ liệu
 </td>
 </tr>`;
@@ -1163,7 +1163,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="ph-light ph-file-text file-icon"></i>
+<i class="ph ph-file-text file-icon"></i>
 </a>`
 :""}
 </td>
@@ -1217,7 +1217,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i class="ph-light ph-caret-left"></i>
+<i class="ph ph-caret-left"></i>
 </div>`;
 
 /* số trang */
@@ -1227,7 +1227,7 @@ html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(
 
 /* nút next */
 html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
-<i class="ph-light ph-caret-right"></i>
+<i class="ph ph-caret-right"></i>
 </div>`;
 
 document.getElementById("pagination").innerHTML=html;
