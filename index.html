@@ -8,10 +8,18 @@
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 
 <style>
+  
+.menu-item i{
+  opacity:0.85;
+}
 
+.menu-item:hover i{
+  opacity:1;
+}
+  
 .menu-item,
 .submenu a{
   transition:all .18s ease;
@@ -882,36 +890,31 @@ font-weight:600;
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
   
-i[data-lucide]{
-  width:15px;
-  height:15px;
-  stroke-width:1.1;
+/* PHOSPHOR ICON */
+
+.menu-item i,
+.submenu a i,
+.searchBox i,
+.page-btn i,
+.file-icon{
+  font-size:16px;
+  line-height:1;
 }
 
-/* MENU SIDEBAR (nhỏ gọn hơn) */
-.menu-item i[data-lucide]{
-  width:15px;
-  height:15px;
-  stroke-width:1.1;
-}
-  
-.submenu i[data-lucide]{
-  width:13px;
-  height:13px;
-  stroke-width:1.0;
+/* submenu nhỏ hơn */
+.submenu a i{
+  font-size:14px;
 }
 
-.searchBox i[data-lucide]{
-  width:9px;
-  height:9px;
-  stroke-width:1.1;
+/* icon search nhỏ */
+.searchBox i{
+  font-size:13px;
 }
 
-.clearSearch{
-  right:12px;
-  left:auto !important;
+/* icon file */
+.file-icon{
+  font-size:16px;
 }
-  
 </style>
 </head>
 
@@ -920,11 +923,11 @@ i[data-lucide]{
 <div class="sidebar">
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i data-lucide="chevron-left" class="toggleBtn" onclick="toggleSidebar()"></i>
+  <i class="ph-light ph-caret-left toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i data-lucide="layers"></i>
+<i class="ph-light ph-squares-four"></i>
 <span>Tổng hợp</span>
 </div>
 
@@ -933,30 +936,30 @@ i[data-lucide]{
 <i data-lucide="folder-tree"></i>
 Phân loại
 </span>
-<i data-lucide="chevron-right" class="caret"></i>
+<i class="ph-light ph-tree-structure"></i>
 </div>
 
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i data-lucide="scale"></i>
+<i class="ph-light ph-scales"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i data-lucide="building-2"></i>
+<i class="ph-light ph-buildings"></i>
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i data-lucide="file-text"></i>
+<i class="ph-light ph-file-text"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i data-lucide="hospital"></i>
+<i class="ph-light ph-hospital"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
@@ -973,12 +976,12 @@ Phân loại
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i data-lucide="search"></i>
+<i class="ph-light ph-magnifying-glass"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
 onkeyup="searchDocs(this.value);toggleClearBtn()">
-<i data-lucide="x" class="clearSearch" onclick="clearSearch()"></i>
+<i class="ph-light ph-x clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -1092,7 +1095,7 @@ if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
 `<tr class="noDataRow">
 <td colspan="8" class="noData">
-<i data-lucide="search"></i>
+<i class="ph-light ph-magnifying-glass"></i>
  Không tìm thấy dữ liệu
 </td>
 </tr>`;
@@ -1149,7 +1152,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i data-lucide="file-text" class="file-icon"></i>
+<i class="ph-light ph-file-text file-icon"></i>
 </a>`
 :""}
 </td>
@@ -1164,8 +1167,6 @@ let endItem=Math.min(end, filteredDocs.length);
 document.getElementById("pageInfo").innerText=
 `Hiển thị ${startItem}-${endItem} / ${filteredDocs.length} văn bản`;
 renderPagination();
-lucide.createIcons();
-
 }
   
 function openPDF(url,row){
@@ -1205,7 +1206,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i data-lucide="chevron-left"></i>
+<i class="ph-light ph-caret-left"></i>
 </div>`;
 
 /* số trang */
@@ -1215,11 +1216,10 @@ html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(
 
 /* nút next */
 html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
-<i data-lucide="chevron-right"></i>
+<i class="ph-light ph-caret-right"></i>
 </div>`;
 
 document.getElementById("pagination").innerHTML=html;
-lucide.createIcons()
 }
 
 function changePage(page){
@@ -1321,7 +1321,6 @@ iframe.msRequestFullscreen();
 </div>
   
 <script>
-lucide.createIcons();
 </script>
   
 </body>
