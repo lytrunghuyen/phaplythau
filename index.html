@@ -302,10 +302,11 @@ font-size:14px;
 }
   
 .tableCard{
+width:100%;
 background:white;
 border-radius:12px;
 box-shadow:0 6px 20px rgba(0,0,0,0.06);
-overflow:hidden;
+overflow:auto;
 border:1px solid #eee;
 }
 
@@ -687,7 +688,9 @@ color:#1E5DFE;
 @media (max-width:900px){
 
 .content{
-margin-left:70px;
+margin-left:260px;   /* 👈 đúng bằng sidebar */
+padding:35px;
+width:calc(100% - 260px); /* 👈 chống tràn */
 }
 
 .sidebar{
