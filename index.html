@@ -831,6 +831,89 @@ gap:6px;
 color:#374151;
 font-weight:600;
 }
+
+/* ===== SIDEBAR TOGGLE ===== */
+
+.sidebar{
+  width:260px;
+  transition:width .32s cubic-bezier(.4,0,.2,1), padding .3s;
+  will-change:width;
+}
+
+/* trạng thái thu gọn */
+.sidebar.collapsed{
+  width:78px;
+  padding:25px 10px;
+}
+
+/* CONTENT co giãn */
+.content{
+  transition:all .32s cubic-bezier(.4,0,.2,1);
+}
+
+.sidebar.collapsed ~ .content{
+  margin-left:78px;
+  width:calc(100% - 78px);
+}
+
+/* Ẩn chữ mượt */
+.sidebar h2,
+.sidebar .menu-item span,
+.sidebar .submenu span,
+.sidebar .sidebarFooter{
+  transition:opacity .2s ease, transform .2s ease;
+}
+
+.sidebar.collapsed h2,
+.sidebar.collapsed .menu-item span,
+.sidebar.collapsed .submenu span,
+.sidebar.collapsed .sidebarFooter{
+  opacity:0;
+  transform:translateX(-10px);
+  pointer-events:none;
+}
+
+/* căn giữa icon */
+.sidebar.collapsed .menu-item{
+  justify-content:center;
+}
+
+/* ẩn submenu */
+.sidebar.collapsed .submenu{
+  display:none;
+}
+
+/* ===== NÚT TOGGLE ===== */
+
+.toggleBtn{
+  font-size:16px;
+  cursor:pointer;
+  color:#6b7280;
+  transition:.3s ease;
+}
+
+.toggleBtn:hover{
+  color:#1E5DFE;
+  transform:scale(1.1);
+}
+
+/* xoay mũi tên */
+.sidebar.collapsed .toggleBtn{
+  transform:rotate(180deg);
+}
+
+.sidebar.collapsed .menu-item:hover::after{
+  content:attr(data-title);
+  position:absolute;
+  left:65px;
+  background:#374151;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:6px;
+  font-size:12px;
+  white-space:nowrap;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
   
 </style>
 </head>
@@ -840,7 +923,8 @@ font-weight:600;
 <div class="sidebar">
 
 <div class="sidebarHeader">
-<h2>📚 Pháp lý đấu thầu</h2>
+  <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
+  <i class="fa-solid fa-chevron-left toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
