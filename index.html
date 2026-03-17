@@ -11,13 +11,7 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-  
-.menu-item i[data-lucide]{
-  width:17px;
-  height:17px;
-  stroke-width:1.1;
-}
-  
+
 .menu-item,
 .submenu a{
   transition:all .18s ease;
@@ -887,16 +881,24 @@ font-weight:600;
   white-space:nowrap;
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
-
+  
 i[data-lucide]{
-  width:16px;        /* 👈 nhỏ hơn */
-  height:16px;
-  stroke-width:1.1;  /* 👈 nét mảnh hơn */
+  width:15px;
+  height:15px;
+  stroke-width:1.1;
 }
 
+/* MENU SIDEBAR (nhỏ gọn hơn) */
+.menu-item i[data-lucide]{
+  width:15px;
+  height:15px;
+  stroke-width:1.1;
+}
+  
 .submenu i[data-lucide]{
   width:13px;
   height:13px;
+  stroke-width:1.0;
 }
 
 .searchBox i[data-lucide]{
