@@ -8,8 +8,6 @@
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
 
 thead th{
@@ -924,7 +922,7 @@ font-weight:600;
 
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i class="fa-solid fa-chevron-left toggleBtn" onclick="toggleSidebar()"></i>
+  <i data-lucide="chevron-left" class="toggleBtn"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
@@ -934,10 +932,10 @@ font-weight:600;
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
 <span>
-<i data-lucide="folder-tree"></i>
+<i data-lucide="folder"></i>
 Phân loại
 </span>
-<i class="fa-solid fa-chevron-right caret"></i>
+<i data-lucide="chevron-right" class="caret"></i>
 </div>
 
 <div class="submenu">
@@ -977,12 +975,12 @@ Phân loại
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i class="fa-solid fa-magnifying-glass"></i>
+<i data-lucide="search"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
 onkeyup="searchDocs(this.value);toggleClearBtn()">
-<i class="fa-solid fa-xmark clearSearch" onclick="clearSearch()"></i>
+<i data-lucide="x" class="clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -1089,6 +1087,7 @@ html+=`
 }
 
 document.getElementById("docTable").innerHTML=html;
+lucide.createIcons(); // 👈 bắt buộc
 }
   
 function renderTable(){
@@ -1153,7 +1152,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="fa-solid fa-file-word file-icon"></i>
+<i data-lucide="file-text" class="file-icon"></i>
 </a>`
 :""}
 </td>
@@ -1208,7 +1207,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i class="fa-solid fa-chevron-left"></i>
+<i data-lucide="chevron-left"></i>
 </div>`;
 
 /* số trang */
