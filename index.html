@@ -12,6 +12,12 @@
 
 <style>
   
+.menu-item i[data-lucide]{
+  width:17px;
+  height:17px;
+  stroke-width:1.4;
+}
+  
 .menu-item,
 .submenu a{
   transition:all .18s ease;
@@ -566,9 +572,9 @@ white-space:nowrap;
 
 /* Icon Word - Cột File */
 .file-icon{
-font-size:20px;
-color:#6b7280;
-transition:.2s;
+  width:16px;
+  height:16px;
+  stroke-width:1.4;
 }
 
 td a:hover .file-icon{
@@ -883,22 +889,20 @@ font-weight:600;
 }
 
 i[data-lucide]{
-  width:18px;
-  height:18px;
-  stroke-width:1.6;
+  width:16px;        /* 👈 nhỏ hơn */
+  height:16px;
+  stroke-width:1.4;  /* 👈 nét mảnh hơn */
 }
 
 .submenu i[data-lucide]{
-  width:16px;
-  height:16px;
+  width:13px;
+  height:13px;
 }
 
 .searchBox i[data-lucide]{
-  position:absolute;
-  left:12px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#9ca3af;
+  width:12px;
+  height:12px;
+  stroke-width:1.4;
 }
 
 .clearSearch{
@@ -912,7 +916,6 @@ i[data-lucide]{
 <body>
 
 <div class="sidebar">
-ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
   <i data-lucide="chevron-left" class="toggleBtn" onclick="toggleSidebar()"></i>
