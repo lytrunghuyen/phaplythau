@@ -23,6 +23,7 @@ z-index:5;
 body{
 font-family:'Montserrat',sans-serif;
 margin:0;
+display:flex;
 background:#f1f3f7; /* Màu nền website */
 line-height:1.4;
 font-size:15px;
@@ -226,10 +227,9 @@ letter-spacing:.5px;
 }
 
 .content{
-margin-left:260px;
+flex:1;
 padding:35px;
-width:calc(100% - 260px); /* 👈 bắt buộc */
-}
+overflow-x:auto;
 
 /* 👇 thêm dòng này */
 margin-left:260px;
@@ -302,11 +302,10 @@ font-size:14px;
 }
   
 .tableCard{
-width:100%;
 background:white;
 border-radius:12px;
 box-shadow:0 6px 20px rgba(0,0,0,0.06);
-overflow:auto;
+overflow:hidden;
 border:1px solid #eee;
 }
 
@@ -687,20 +686,13 @@ color:#1E5DFE;
 
 @media (max-width:900px){
 
+.content{
+margin-left:70px;
+}
+
 .sidebar{
 width:70px;
 padding:20px 10px;
-}
-
-.content{
-margin-left:70px;
-width:calc(100% - 70px);
-}
-
-}
-
-.sidebar{
-z-index:100;
 }
 
 .sidebar h2{
