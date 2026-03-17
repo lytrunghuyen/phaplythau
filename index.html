@@ -721,6 +721,47 @@ color:#6b7280 !important;
 font-weight:normal !important;
 }
 
+/* SKELETON - Hiệu ứng load dữ liệu*/
+
+.skeleton{
+position:relative;
+overflow:hidden;
+background:#e5e7eb;
+border-radius:6px;
+}
+
+/* shimmer effect */
+.skeleton::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.5),
+transparent
+);
+animation:skeleton-loading 1.2s infinite;
+}
+
+@keyframes skeleton-loading{
+100%{
+left:100%;
+}
+}
+
+/* row skeleton */
+.skeleton-row td{
+padding:10px;
+}
+
+.skeleton-box{
+height:12px;
+border-radius:4px;
+}
 </style>
 </head>
 
@@ -853,6 +894,9 @@ let parts=dateStr.split("/");
 return new Date(parts[2],parts[1]-1,parts[0]);
 }
 
+/* hiển thị skeleton trước */
+renderSkeleton();
+
 fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
 .then(res=>res.json())
 .then(data=>{
@@ -860,7 +904,34 @@ allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
 filteredDocs=allDocs;
 renderTable();
 });
+allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
+filteredDocs=allDocs;
+renderTable();
+});
 
+/* SKELETON */
+
+function renderSkeleton(){
+let html="";
+
+for(let i=0;i<8;i++){
+html+=`
+<tr class="skeleton-row">
+<td><div class="skeleton skeleton-box" style="width:20px;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:80px;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:100%;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:70px;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:70px;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:90px;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:60px;"></div></td>
+<td><div class="skeleton skeleton-box" style="width:30px;"></div></td>
+</tr>
+`;
+}
+
+document.getElementById("docTable").innerHTML=html;
+}
+  
 function renderTable(){
 if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
