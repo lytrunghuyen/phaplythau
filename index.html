@@ -293,10 +293,6 @@ table-layout:auto;
 min-width:900px;
 font-size:14px;
 }
-
-tbody{
-transition:opacity .25s ease;
-}
   
 .tableCard{
 background:white;
@@ -936,14 +932,8 @@ document.getElementById("docTable").innerHTML=html;
 }
   
 function renderTable(){
-
-const tableBody = document.getElementById("docTable");
-
-/* fade out nhẹ trước khi render */
-tableBody.style.opacity = 0;
-
 if(filteredDocs.length===0){
-tableBody.innerHTML=
+document.getElementById("docTable").innerHTML=
 `<tr class="noDataRow">
 <td colspan="8" class="noData">
 <i class="fa-solid fa-magnifying-glass"></i>
@@ -953,9 +943,6 @@ tableBody.innerHTML=
 
 document.getElementById("pageInfo").innerText="";
 document.getElementById("pagination").innerHTML="";
-
-/* fade in lại */
-setTimeout(()=>{ tableBody.style.opacity = 1; },100);
 return;
 }
 
@@ -975,10 +962,12 @@ let status="";
 if(doc.trangthai==="OK"){
 status=`<span class="status-ok">Còn hiệu lực</span>`;
 }
+
 else if(doc.trangthai==="S"){
 let note = doc.ghichu || "Thông tin sửa đổi đang được cập nhật";
 status=`<span class="status-edit" data-tooltip="${note}">Đã sửa đổi</span>`;
 }
+
 else if(doc.trangthai==="X"){
 let note=doc.ghichu || "Thông tin đang được cập nhật";
 status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`;
@@ -986,13 +975,21 @@ status=`<span class="status-x" data-tooltip="${note}">Hết hiệu lực</span>`
 
 html+=`
 <tr onclick="openPDF('${doc.linkpdf}', this)">
+
 <td>${stt}</td>
+
 <td>${doc.so||""}</td>
+
 <td>${doc.ten||""}</td>
+
 <td>${doc.ngay||""}</td>
+
 <td>${doc.hieuluc||""}</td>
+
 <td>${doc.coquan||""}</td>
+
 <td>${status}</td>
+
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
@@ -1000,25 +997,18 @@ ${doc.linkword?
 </a>`
 :""}
 </td>
+
 </tr>
 `;
 });
 
-/* render */
-tableBody.innerHTML=html;
-
-/* fade in */
-setTimeout(()=>{
-tableBody.style.opacity = 1;
-},100);
-
+document.getElementById("docTable").innerHTML=html;
 let startItem=start+1;
 let endItem=Math.min(end, filteredDocs.length);
-
 document.getElementById("pageInfo").innerText=
 `Hiển thị ${startItem}-${endItem} / ${filteredDocs.length} văn bản`;
-
 renderPagination();
+
 }
   
 function openPDF(url,row){
