@@ -1133,7 +1133,6 @@ fetch(url)
 .then(r=>r.json())
 .then(data=>{
 let actual=parseInt(data.count.replace(/[^0-9]/g,''))||0;
-document.getElementById("visitor-count").innerText=(actual*5).toLocaleString();
 document.getElementById("totalViews").innerText=(actual*5).toLocaleString();
 })
 .catch(()=>{
@@ -1168,10 +1167,6 @@ iframe.msRequestFullscreen();
 </div>
 </div>
 <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-</div>
-</div>
-<div class="viewCounter">
-<span id="visitor-count">...</span>
 </div>
 </body>
 </html>
