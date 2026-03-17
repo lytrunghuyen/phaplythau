@@ -688,6 +688,20 @@ margin:0;
 
 }
 
+.noDataRow{
+cursor:default !important;
+}
+
+.noDataRow:hover{
+background:white !important;
+transform:none !important;
+box-shadow:none !important;
+}
+
+.noDataRow:hover td{
+color:#6b7280 !important;
+font-weight:normal !important;
+}
 
 </style>
 </head>
@@ -832,7 +846,7 @@ renderTable();
 function renderTable(){
 if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
-`<tr>
+`<tr class="noDataRow">
 <td colspan="8" class="noData">
 <i class="fa-solid fa-magnifying-glass"></i>
  Không tìm thấy dữ liệu
