@@ -286,46 +286,49 @@ letter-spacing:.5px;
 /* SEARCH */
 
 .searchBox{
-margin-bottom:15px;
-position:relative;
-max-width:430px;
+  margin-bottom:15px;
+  position:relative;
+  max-width:430px;
 }
 
-.searchBox .fa-magnifying-glass{
-position:absolute;
-left:12px;
-top:50%;
-transform:translateY(-50%);
-color:#9ca3af;
-font-size:14px;
-pointer-events:none;
+/* icon trái */
+.searchBox i:first-child{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:18px;
+  color:#9ca3af;
+  pointer-events:none;
 }
 
+/* icon X bên phải */
 .clearSearch{
-position:absolute;
-right:12px;
-top:50%;
-transform:translateY(-50%);
-font-size:18px;
-color:#9ca3af;
-cursor:pointer;
-display:none;
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:18px;
+  color:#9ca3af;
+  cursor:pointer;
+  display:none;
 }
 
+/* hover */
 .clearSearch:hover{
-color:#6b7280;
-transform:translateY(-50%) scale(1.15);
+  color:#6b7280;
+  transform:translateY(-50%) scale(1.1);
 }
   
 .searchBox input{
-width:100%;
-padding:10px 38px 10px 34px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:14px;
-background:white;
-transition:.25s;
-box-sizing:border-box;
+  width:100%;
+  padding:10px 40px 10px 40px;  /* 👈 cân 2 bên */
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:14px;
+  background:white;
+  transition:.25s;
+  box-sizing:border-box;
 }
 
 .searchBox input:hover{
