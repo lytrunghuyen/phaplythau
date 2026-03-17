@@ -182,13 +182,19 @@ margin-bottom:25px;
 }
 
 /* DROPDOWN */
-
-.dropdown{
-display:flex;
-justify-content:space-between;
-align-items:center;
+  
+.sidebar.collapsed .caret{
+  display:none;
 }
-
+.dropdown{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+  
+.dropdown .caret{
+  margin-left:auto; /* 👈 đẩy caret sang phải */
+}
 .dropdown span{
 display:flex;
 align-items:center;
