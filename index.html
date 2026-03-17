@@ -11,7 +11,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+  
+.menu-item,
+.submenu a{
+  transition:all .18s ease;
+}
 
+.menu-item:hover,
+.submenu a:hover{
+  box-shadow:0 1px 2px rgba(0,0,0,0.04); /* rất nhẹ */
+}
+  
 thead th{
 position:sticky;
 top:0;
@@ -123,34 +133,15 @@ margin-bottom:25px;
 
 /* hiệu ứng hover mới */
 .menu-item:hover{
-  background:linear-gradient(90deg, rgba(30,93,254,0.08), rgba(30,93,254,0.03));
+  background:#e8efff; /* ✅ rõ hơn, sạch hơn */
   color:#1E5DFE;
-  box-shadow:0 4px 12px rgba(30,93,254,0.08);
-  transform:translateX(3px); /* 👈 thêm dòng này */
+  transform:none; /* ❌ bỏ translate */
 }
 
 /* icon cũng đổi nhẹ */
 .menu-item:hover i{
   color:#1E5DFE;
   transform:scale(1.05);
-}
-
-/* thêm hiệu ứng "vạch sáng bên trái" */
-.menu-item::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
-  width:4px;
-  height:0%;
-  background:#1E5DFE;
-  border-radius:4px;
-  transition:height .2s ease;
-}
-
-.menu-item:hover::before{
-  height:60%;
 }
 
 /* active giữ nổi bật hơn hover */
@@ -242,9 +233,9 @@ color:#9ca3af;
 
 /* hover đồng bộ với menu chính */
 .submenu a:hover{
-  background:linear-gradient(90deg, rgba(30,93,254,0.08), rgba(30,93,254,0.02));
+  background:#eef2ff; /* nhẹ hơn menu chính */
   color:#1E5DFE;
-  transform:translateX(3px);
+  transform:none; /* ❌ bỏ */
 }
 
 /* icon hover */
