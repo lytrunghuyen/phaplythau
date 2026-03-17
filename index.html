@@ -3,7 +3,7 @@
 <head>
 
 <script data-goatcounter="https://lytrunghuyen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
+<script src="https://unpkg.com/lucide@latest"></script>
 <meta charset="utf-8">
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -928,13 +928,13 @@ font-weight:600;
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i class="fa-solid fa-layer-group"></i>
+<i data-lucide="layers"></i>
 <span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
 <span>
-<i class="fa-solid fa-folder-tree"></i>
+<i data-lucide="folder-tree"></i>
 Phân loại
 </span>
 <i class="fa-solid fa-chevron-right caret"></i>
@@ -943,24 +943,24 @@ Phân loại
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i class="fa-solid fa-scale-balanced"></i>
+<i data-lucide="scale"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i class="fa-solid fa-building-columns"></i> 
+<i data-lucide="landmark"></i> 
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i class="fa-solid fa-file-lines"></i>
+<i data-lucide="file-text"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i class="fa-solid fa-hospital"></i>
+<i data-lucide="hospital"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
