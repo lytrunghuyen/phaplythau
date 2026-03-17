@@ -82,12 +82,8 @@ background:#ffffff;
 height:100vh;
 padding:25px;
 border-right:1px solid #e5e7eb;
-
-/* 👇 quan trọng */
-position:fixed;
+position:sticky;
 top:0;
-left:0;
-
 transition:width .25s ease;
 }
 
@@ -230,9 +226,6 @@ letter-spacing:.5px;
 flex:1;
 padding:35px;
 overflow-x:auto;
-
-/* 👇 thêm dòng này */
-margin-left:260px;
 }
 
 /* SEARCH */
@@ -685,10 +678,6 @@ color:#1E5DFE;
 /* Sidebar collapsed */
 
 @media (max-width:900px){
-
-.content{
-margin-left:70px;
-}
 
 .sidebar{
 width:70px;
