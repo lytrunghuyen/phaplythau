@@ -900,13 +900,12 @@ renderSkeleton();
 fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/Sheet1")
 .then(res=>res.json())
 .then(data=>{
-allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
-filteredDocs=allDocs;
-renderTable();
-});
-allDocs=data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
-filteredDocs=allDocs;
-renderTable();
+    allDocs = data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
+    filteredDocs = allDocs;
+    renderTable();
+})
+.catch(err=>{
+    console.error(err);
 });
 
 /* SKELETON */
