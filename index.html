@@ -808,9 +808,9 @@ Phân loại
 
 </div>
 
-<div class="menu-item" onclick="setActive(this);filterDocs('huongdan')">
+<div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
 <i class="fa-solid fa-hospital"></i>
-<span>Quy trình Bệnh viện</span>
+<span>Văn bản Nội bộ</span>
 </div>
 
 <!-- ✅ THÊM ĐOẠN NÀY -->
@@ -909,7 +909,7 @@ fetch("https://opensheet.elk.sh/15t10NKlFARFJK0Fqx66R2qxTCKXZn_tjVJfQ-5lUMQI/She
 .then(res=>res.json())
 .then(data=>{
     allDocs = data.sort((a,b)=>parseDate(b.ngay)-parseDate(a.ngay));
-    filteredDocs = allDocs.filter(doc => doc.type !== "huongdan");
+    filteredDocs = allDocs.filter(doc => doc.type !== "noibo");
     document.getElementById("totalDocs").innerText = allDocs.length;
     renderTable();
 })
@@ -1089,8 +1089,8 @@ behavior:"smooth"
 
 function filterDocs(type){
 if(type==="all"){
-    // ❌ loại bỏ "huongdan"
-    filteredDocs = allDocs.filter(doc => doc.type !== "huongdan");
+    // ❌ loại bỏ "noibo"
+    filteredDocs = allDocs.filter(doc => doc.type !== "noibo");
 }
 else{
     filteredDocs = allDocs.filter(doc => doc.type === type);
