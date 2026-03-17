@@ -244,24 +244,6 @@ color:#9ca3af;
   transform:scale(1.05);
 }
 
-/* line bên trái (nhỏ hơn menu chính) */
-.submenu a::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
-  width:3px;
-  height:0%;
-  background:#1E5DFE;
-  border-radius:4px;
-  transition:height .2s ease;
-}
-
-.submenu a:hover::before{
-  height:55%;
-}
-
 /* active */
 .submenu a.active{
   background:#1E5DFE;
@@ -270,12 +252,6 @@ color:#9ca3af;
 
 .submenu a.active i{
   color:white;
-}
-
-/* giữ line đồng bộ */
-.submenu a.active::before{
-  height:60%;
-  background:#1E5DFE;
 }
 
 /* CONTENT */
