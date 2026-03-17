@@ -436,21 +436,31 @@ justify-self:start;
 .page-btn:hover{
 background:#eef3ff;
 border-color:#1E5DFE;
+transform:translateY(-1px);
 }
 
 .page-btn{
-padding:6px 10px;
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+
 border:1px solid #ddd;
 cursor:pointer;
-border-radius:6px;
+border-radius:8px;
 background:white;
+
+transition:.2s;
 }
 
 .page-btn.active{
 background:#1E5DFE;
 color:white;
 border:none;
-box-shadow:0 4px 10px rgba(110,53,232,0.3);
+box-shadow:0 6px 14px rgba(30,93,254,0.25);
+
+transform:scale(1.12);
 }
 
 /* STATUS */
