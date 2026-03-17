@@ -3,27 +3,14 @@
 <head>
 
 <script data-goatcounter="https://lytrunghuyen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+
 <meta charset="utf-8">
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-
-i[data-lucide]{
-  width:16px;
-  height:16px;
-  stroke-width:1.5; /* 👈 mảnh hơn */
-  vertical-align:middle;
-}
-
-/* icon trong menu hơi to hơn chút cho dễ nhìn */
-.menu-item i,
-.submenu a i{
-  width:18px;
-  height:18px;
-  stroke-width:1.6;
-}
 
 thead th{
 position:sticky;
@@ -937,43 +924,43 @@ font-weight:600;
 
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i data-lucide="chevron-left" class="toggleBtn"></i>
+  <i class="fa-solid fa-chevron-left toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i data-lucide="layers"></i>
+<i class="fa-solid fa-layer-group"></i>
 <span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
 <span>
-<i data-lucide="folder"></i>
+<i class="fa-solid fa-folder-tree"></i>
 Phân loại
 </span>
-<i data-lucide="chevron-right" class="caret"></i>
+<i class="fa-solid fa-chevron-right caret"></i>
 </div>
 
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i data-lucide="scale"></i>
+<i class="fa-solid fa-scale-balanced"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i data-lucide="landmark"></i> 
+<i class="fa-solid fa-building-columns"></i> 
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i data-lucide="file-text"></i>
+<i class="fa-solid fa-file-lines"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i data-lucide="hospital"></i>
+<i class="fa-solid fa-hospital"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
@@ -990,12 +977,12 @@ Phân loại
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i data-lucide="search"></i>
+<i class="fa-solid fa-magnifying-glass"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
 onkeyup="searchDocs(this.value);toggleClearBtn()">
-<i data-lucide="x" class="clearSearch" onclick="clearSearch()"></i>
+<i class="fa-solid fa-xmark clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -1102,7 +1089,6 @@ html+=`
 }
 
 document.getElementById("docTable").innerHTML=html;
-lucide.createIcons(); // 👈 bắt buộc
 }
   
 function renderTable(){
@@ -1167,7 +1153,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i data-lucide="file-text" class="file-icon"></i>
+<i class="fa-solid fa-file-word file-icon"></i>
 </a>`
 :""}
 </td>
@@ -1222,7 +1208,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i data-lucide="chevron-left"></i>
+<i class="fa-solid fa-chevron-left"></i>
 </div>`;
 
 /* số trang */
