@@ -1102,8 +1102,8 @@ html+=`
 }
 
 document.getElementById("docTable").innerHTML=html;
-tablerIcons.createIcons(); // 👈 bắt buộc
-}
+tablerIcons.createIcons(); // 👈 THÊM DÒNG NÀY
+let startItem=start+1;
   
 function renderTable(){
 if(filteredDocs.length===0){
@@ -1235,6 +1235,7 @@ html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
 </div>`;
 
 document.getElementById("pagination").innerHTML=html;
+tablerIcons.createIcons(); // 👈 THÊM DÒNG NÀY
 }
 
 function changePage(page){
