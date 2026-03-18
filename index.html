@@ -1103,14 +1103,14 @@ html+=`
 
 document.getElementById("docTable").innerHTML=html;
 tablerIcons.createIcons(); // 👈 THÊM DÒNG NÀY
-  
+{
 function renderTable()
- {
+
 if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
 `<tr class="noDataRow">
 <td colspan="8" class="noData">
-<i class="ti ti-search"></i>
+<i data-tabler="search"></i>
  Không tìm thấy dữ liệu
 </td>
 </tr>`;
