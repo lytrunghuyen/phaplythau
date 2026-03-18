@@ -8,7 +8,7 @@
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://unpkg.com/@tabler/icons@latest/icons.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
 <style>
   
@@ -576,14 +576,14 @@ white-space:nowrap;
 }
 
 /* ICON FILE WORD */
-.file-word{
+.file-doc{
   font-size:26px;        /* 👈 chỉnh size ở đây */
   color:#9ca3af;         /* xám sáng */
   transition:all .2s ease;
 }
 
 /* hover */
-td a:hover .file-word{
+td a:hover .file-doc{
   color:#1E5DFE;
   transform:scale(1.15);
 }
@@ -898,39 +898,50 @@ font-weight:600;
 .file-icon{
   font-size:16px;
 }
-  
-/* ===== TABLER SVG ===== */
 
-svg{
-  width:22px;
-  height:22px;
-  stroke-width:1.5;
-}
+/* ===== ICON SIZE CHUẨN ===== */
 
 /* menu chính */
-.menu-item svg{
-  width:24px;
-  height:24px;
+.menu-item i{
+  font-size:24px;
 }
 
 /* submenu */
-.submenu a svg{
-  width:20px;
-  height:20px;
+.submenu a i{
+  font-size:20px;
 }
 
 /* search */
-.searchBox svg{
-  width:18px;
-  height:18px;
+.searchBox i{
+  font-size:18px;
+}
+
+/* pagination */
+.page-btn i{
+  font-size:20px;
 }
 
 /* file */
-.file-word{
-  width:24px;
-  height:24px;
+.file-icon{
+  font-size:27px;
+}
+  
+.searchBox .clearSearch:hover{
+  color:#f97316 !important;
+}
+  
+/* hover giống style cũ */
+.menu-item:hover .ti,
+.submenu a:hover .ti{
+  stroke:#1E5DFE;
 }
 
+/* active */
+.menu-item.active .ti,
+.submenu a.active .ti{
+  stroke:white;
+}
+  
 </style>
 </head>
 
@@ -939,41 +950,41 @@ svg{
 <div class="sidebar">
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i data-tabler="chevron-left" class="toggleBtn" onclick="toggleSidebar()"></i>
+  <i class="ti ti-chevron-left toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i data-tabler="layout-grid"></i>
+<i class="ti ti-layout-grid"></i>
 <span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
-<i data-tabler="filter"></i>
+  <i class="ti ti-filter"></i>
   <span>Phân loại</span>
-  <i data-tabler="chevron-right" class="caret"></i>
+  <i class="ti ti-chevron-right"></i>
 </div>
 
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i data-tabler="gavel"></i>
+<i class="ti ti-gavel"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i data-tabler="clipboard-text"></i>
+<i class="ti ti-clipboard-text"></i>
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i data-tabler="file-description"></i>
+<i class="ti ti-file-description"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i data-tabler="folder-open"></i>
+<i class="ti ti-folder-open"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
@@ -990,12 +1001,12 @@ svg{
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i data-tabler="search"></i>
+<i class="ti ti-search"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
 onkeyup="searchDocs(this.value);toggleClearBtn()">
-<i data-tabler="x" class="clearSearch" onclick="clearSearch()"></i>
+<i class="ti ti-x clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -1102,15 +1113,14 @@ html+=`
 }
 
 document.getElementById("docTable").innerHTML=html;
-tablerIcons.createIcons(); // 👈 THÊM DÒNG NÀY
-{
-function renderTable()
-
+}
+  
+function renderTable(){
 if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
 `<tr class="noDataRow">
 <td colspan="8" class="noData">
-<i data-tabler="search"></i>
+<i class="ti ti-search"></i>
  Không tìm thấy dữ liệu
 </td>
 </tr>`;
@@ -1167,7 +1177,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i data-tabler="file-word"></i>
+<i class="ti ti-file-word file-doc"></i>
 </a>`
 :""}
 </td>
@@ -1221,7 +1231,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i data-tabler="chevron-left"></i>
+<i class="ti ti-chevron-left"></i>
 </div>`;
 
 /* số trang */
@@ -1231,11 +1241,10 @@ html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(
 
 /* nút next */
 html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
-<i data-tabler="chevron-right"></i>
+<i class="ti ti-chevron-right"></i>
 </div>`;
 
 document.getElementById("pagination").innerHTML=html;
-tablerIcons.createIcons(); // 👈 THÊM DÒNG NÀY
 }
 
 function changePage(page){
@@ -1335,9 +1344,8 @@ iframe.msRequestFullscreen();
 </div>
 <iframe id="pdfViewer" src="" frameborder="0"></iframe>
 </div>
-
+  
 <script>
-  tablerIcons.createIcons();
 </script>
   
 </body>
