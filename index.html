@@ -995,7 +995,7 @@ svg{
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
 onkeyup="searchDocs(this.value);toggleClearBtn()">
-<i class="ti ti-x clearSearch" onclick="clearSearch()"></i>
+<i data-tabler="x" class="clearSearch" onclick="clearSearch()"></i>
 </div>
 
 <div class="tableCard">
@@ -1103,6 +1103,7 @@ html+=`
 
 document.getElementById("docTable").innerHTML=html;
 tablerIcons.createIcons(); // 👈 bắt buộc
+}
   
 function renderTable(){
 if(filteredDocs.length===0){
@@ -1220,7 +1221,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i data-tabler="chevron-left" class="toggleBtn"></i>
+<i data-tabler="chevron-left"></i>
 </div>`;
 
 /* số trang */
