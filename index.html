@@ -898,50 +898,39 @@ font-weight:600;
 .file-icon{
   font-size:16px;
 }
+  
+/* ===== TABLER SVG ===== */
 
-/* ===== ICON SIZE CHUẨN ===== */
+svg{
+  width:22px;
+  height:22px;
+  stroke-width:1.5;
+}
 
 /* menu chính */
-.menu-item i{
-  font-size:24px;
+.menu-item svg{
+  width:24px;
+  height:24px;
 }
 
 /* submenu */
-.submenu a i{
-  font-size:20px;
+.submenu a svg{
+  width:20px;
+  height:20px;
 }
 
 /* search */
-.searchBox i{
-  font-size:18px;
-}
-
-/* pagination */
-.page-btn i{
-  font-size:20px;
+.searchBox svg{
+  width:18px;
+  height:18px;
 }
 
 /* file */
-.file-icon{
-  font-size:27px;
-}
-  
-.searchBox .clearSearch:hover{
-  color:#f97316 !important;
-}
-  
-/* hover giống style cũ */
-.menu-item:hover .ti,
-.submenu a:hover .ti{
-  stroke:#1E5DFE;
+.file-word{
+  width:24px;
+  height:24px;
 }
 
-/* active */
-.menu-item.active .ti,
-.submenu a.active .ti{
-  stroke:white;
-}
-  
 </style>
 </head>
 
@@ -1113,7 +1102,7 @@ html+=`
 }
 
 document.getElementById("docTable").innerHTML=html;
-}
+tablerIcons.createIcons(); // 👈 bắt buộc
   
 function renderTable(){
 if(filteredDocs.length===0){
@@ -1344,8 +1333,9 @@ iframe.msRequestFullscreen();
 </div>
 <iframe id="pdfViewer" src="" frameborder="0"></iframe>
 </div>
-  
+
 <script>
+  tablerIcons.createIcons();
 </script>
   
 </body>
