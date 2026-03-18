@@ -8,7 +8,7 @@
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://unpkg.com/@tabler/icons@latest/icons.min.js"></script>
 
 <style>
   
@@ -950,41 +950,41 @@ font-weight:600;
 <div class="sidebar">
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i class="ti ti-chevron-left toggleBtn" onclick="toggleSidebar()"></i>
+  <i data-tabler="chevron-left" class="toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i class="ti ti-layout-grid"></i>
+<i data-tabler="layout-grid"></i>
 <span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
-  <i class="ti ti-filter"></i>
+<i data-tabler="filter"></i>
   <span>Phân loại</span>
-  <i class="ti ti-chevron-right"></i>
+  <i data-tabler="chevron-right" class="caret"></i>
 </div>
 
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i class="ti ti-gavel"></i>
+<i data-tabler="gavel"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i class="ti ti-clipboard-text"></i>
+<i data-tabler="clipboard-text"></i>
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i class="ti ti-file-description"></i>
+<i data-tabler="file-description"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i class="ti ti-folder-open"></i>
+<i data-tabler="folder-open"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
@@ -1001,7 +1001,7 @@ font-weight:600;
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i class="ti ti-search"></i>
+<i data-tabler="search"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
@@ -1231,7 +1231,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i class="ti ti-chevron-left"></i>
+<i data-tabler="chevron-left" class="toggleBtn"></i>
 </div>`;
 
 /* số trang */
