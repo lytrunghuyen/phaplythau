@@ -8,7 +8,8 @@
 <title>Thư viện văn bản đấu thầu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="https://unpkg.com/@tabler/icons-webfont@latest/tabler-icons.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
 <style>
   
@@ -930,6 +931,23 @@ font-weight:600;
   color:#f97316 !important;
 }
 
+/* Tabler icon chuẩn nét mảnh */
+.ti{
+  stroke-width:1.5; /* 👈 mảnh đẹp */
+}
+
+/* hover giống style cũ */
+.menu-item:hover .ti,
+.submenu a:hover .ti{
+  stroke:#1E5DFE;
+}
+
+/* active */
+.menu-item.active .ti,
+.submenu a.active .ti{
+  stroke:white;
+}
+  
 </style>
 </head>
 
@@ -938,41 +956,41 @@ font-weight:600;
 <div class="sidebar">
 <div class="sidebarHeader">
   <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-  <i class="ph ph-caret-left toggleBtn" onclick="toggleSidebar()"></i>
+  <i class="ti ti-chevron-left toggleBtn" onclick="toggleSidebar()"></i>
 </div>
 
 <div class="menu-item active" onclick="setActive(this);filterDocs('all')">
-<i class="ph ph-squares-four"></i>
+<i class="ti ti-layout-grid"></i>
 <span>Tổng hợp</span>
 </div>
 
 <div class="menu-item dropdown open" onclick="toggleMenu(this)">
-  <i class="ph ph-tree-structure"></i>
+  <i class="ph ti ti-filter"></i>
   <span>Phân loại</span>
-  <i class="ph ph-caret-right caret"></i>
+  <i class="ti ti-chevron-right"></i>
 </div>
 
 <div class="submenu">
 
 <a href="#" onclick="setActive(this);filterDocs('luat')">
-<i class="ph ph-scales"></i>
+<i class="ti ti-gavel"></i>
 <span>Luật</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('nghidinh')">
-<i class="ph ph-buildings"></i>
+<i class="ti ti-clipboard-text"></i>
 <span>Nghị định</span>
 </a>
 
 <a href="#" onclick="setActive(this);filterDocs('thongtu')">
-<i class="ph ph-file-text"></i>
+<i class="ti ti-file-description"></i>
 <span>Thông tư</span>
 </a>
 
 </div>
 
 <div class="menu-item" onclick="setActive(this);filterDocs('noibo')">
-<i class="ph ph-hospital"></i>
+<i class="ti ti-folder-open"></i>
 <span>Tài liệu nội bộ</span>
 </div>
 
@@ -989,7 +1007,7 @@ font-weight:600;
 <h1>Danh sách văn bản</h1>
 
 <div class="searchBox">
-<i class="ph ph-magnifying-glass"></i>
+<i class="ti ti-search"></i>
 <input id="searchInput"
 type="text"
 placeholder="Tìm số hoặc tên văn bản..."
@@ -1108,7 +1126,7 @@ if(filteredDocs.length===0){
 document.getElementById("docTable").innerHTML=
 `<tr class="noDataRow">
 <td colspan="8" class="noData">
-<i class="ph ph-magnifying-glass"></i>
+<i class="ti ti-search"></i>
  Không tìm thấy dữ liệu
 </td>
 </tr>`;
@@ -1165,7 +1183,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="ph ph-file-doc file-doc"></i>
+<i class="ti ti-file-type-doc file-doc"></i>
 </a>`
 :""}
 </td>
@@ -1219,7 +1237,7 @@ let html="";
 
 /* nút prev */
 html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i class="ph ph-caret-left"></i>
+<i class="ti ti-chevron-left"></i>
 </div>`;
 
 /* số trang */
@@ -1229,7 +1247,7 @@ html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(
 
 /* nút next */
 html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
-<i class="ph ph-caret-right"></i>
+<i class="ti ti-chevron-right"></i>
 </div>`;
 
 document.getElementById("pagination").innerHTML=html;
