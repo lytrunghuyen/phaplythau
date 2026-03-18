@@ -577,7 +577,7 @@ white-space:nowrap;
 
 /* ICON FILE WORD */
 .file-doc{
-  font-size:26px;        /* 👈 chỉnh size ở đây */
+  font-size:30px;        /* 👈 chỉnh size ở đây */
   color:#9ca3af;         /* xám sáng */
   transition:all .2s ease;
 }
@@ -585,7 +585,7 @@ white-space:nowrap;
 /* hover */
 td a:hover .file-doc{
   color:#1E5DFE;
-  transform:scale(1.15);
+  transform:scale(1.25);
 }
   
 /* PDF VIEWER */
@@ -1177,7 +1177,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="ti ti-file-description file-doc"></i>
+<i class="ti ti-file-type-docx file-doc"></i>
 </a>`
 :""}
 </td>
