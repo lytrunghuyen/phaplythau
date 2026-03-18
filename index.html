@@ -1103,7 +1103,6 @@ html+=`
 
 document.getElementById("docTable").innerHTML=html;
 tablerIcons.createIcons(); // 👈 THÊM DÒNG NÀY
-let startItem=start+1;
   
 function renderTable(){
 if(filteredDocs.length===0){
@@ -1167,7 +1166,7 @@ html+=`
 <td>
 ${doc.linkword?
 `<a href="${doc.linkword}" target="_blank" onclick="event.stopPropagation();">
-<i class="ti ti-file-word"></i>
+<i data-tabler="file-word"></i>
 </a>`
 :""}
 </td>
@@ -1231,7 +1230,7 @@ html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(
 
 /* nút next */
 html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
-<i class="ti ti-chevron-right"></i>
+<i data-tabler="chevron-right"></i>
 </div>`;
 
 document.getElementById("pagination").innerHTML=html;
