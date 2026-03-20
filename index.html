@@ -923,24 +923,17 @@ font-weight:600;
   transform:translateY(-50%) rotate(180deg); /* 👈 giữ vị trí + xoay */
 }
 
-/* TOOLTIP khi collapsed */
-.sidebar.collapsed .menu-item:hover::after,
-.sidebar.collapsed .submenu a:hover::after{
+.sidebar.collapsed .menu-item:hover::after{
   content:attr(data-title);
   position:absolute;
   left:65px;
-  top:50%;
-  transform:translateY(-50%);
-  
   background:#374151;
   color:#fff;
   padding:6px 10px;
   border-radius:6px;
   font-size:12px;
   white-space:nowrap;
-  
   box-shadow:0 4px 12px rgba(0,0,0,.2);
-  z-index:999;
 }
   
 /* icon file */
@@ -1015,22 +1008,20 @@ font-weight:600;
 
 <div class="submenu">
 
-<a href="#" data-title="Luật" onclick="setActive(this);filterDocs('luat')">
+<a href="#" onclick="setActive(this);filterDocs('luat')">
 <i class="ti ti-gavel"></i>
 <span>Luật</span>
 </a>
 
-<a href="#" data-title="Nghị định" onclick="setActive(this);filterDocs('nghidinh')">
+<a href="#" onclick="setActive(this);filterDocs('nghidinh')">
 <i class="ti ti-clipboard-text"></i>
 <span>Nghị định</span>
 </a>
 
-<a href="#" data-title="Thông tư" onclick="setActive(this);filterDocs('thongtu')">
+<a href="#" onclick="setActive(this);filterDocs('thongtu')">
 <i class="ti ti-file-description"></i>
 <span>Thông tư</span>
 </a>
-
-</div>
 
 </div>
 
