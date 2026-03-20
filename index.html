@@ -838,7 +838,7 @@ font-weight:600;
 }
 
 .sidebar.collapsed h2,
-.sidebar.collapsed .menu-item span,
+.sidebar.collapsed .menu-item span
 .sidebar.collapsed .submenu span,
 .sidebar.collapsed .sidebarFooter{
   opacity:0;
@@ -846,14 +846,42 @@ font-weight:600;
   pointer-events:none;
 }
 
-/* căn giữa icon */
+/* Sidebar khi thu gọn */
 .sidebar.collapsed .menu-item{
   justify-content:center;
+  align-items:center;
+  padding:12px 0;   /* 👈 FIX CÂN GIỮA */
+  gap:0;            /* 👈 XÓA khoảng cách */
+}
+  
+.sidebar.collapsed .menu-item i,
+.sidebar.collapsed .submenu a i{
+  margin:0;
+  display:block;
 }
 
+.sidebar.collapsed .submenu a{
+  justify-content:center;
+  align-items:center;
+  padding:12px 0;
+  gap:0;
+}
+
+
+.sidebar.collapsed .menu-item.active,
+.sidebar.collapsed .submenu a.active{
+  border-radius:18px;
+  width:48px;
+  height:48px;
+  margin:6px auto;   /* 👈 CĂN GIỮA */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+  
 /* ẩn submenu */
 .sidebar.collapsed .submenu{
-  display:none;
+  margin-left:0;
 }
 
 /* ===== NÚT TOGGLE ===== */
