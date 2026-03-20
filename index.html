@@ -1219,25 +1219,55 @@ tr.classList.remove("activeRow");
 }
   
 function renderPagination(){
-let totalPages=Math.ceil(filteredDocs.length/rowsPerPage);
-let html="";
+  let totalPages = Math.ceil(filteredDocs.length / rowsPerPage);
+  let html = "";
 
-/* nút prev */
-html+=`<div class="page-btn" onclick="changePage(${currentPage-1})">
-<i class="ti ti-chevron-left"></i>
-</div>`;
+  if(totalPages <= 1){
+    document.getElementById("pagination").innerHTML = "";
+    return;
+  }
 
-/* số trang */
-for(let i=1;i<=totalPages;i++){
-html+=`<div class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</div>`;
-}
+  // ===== PREV =====
+  html += `<div class="page-btn" onclick="changePage(${currentPage - 1})">
+    <i class="ti ti-chevron-left"></i>
+  </div>`;
 
-/* nút next */
-html+=`<div class="page-btn" onclick="changePage(${currentPage+1})">
-<i class="ti ti-chevron-right"></i>
-</div>`;
+  let maxVisible = 10;
+  let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  let end = start + maxVisible - 1;
 
-document.getElementById("pagination").innerHTML=html;
+  if(end > totalPages){
+    end = totalPages;
+    start = Math.max(1, end - maxVisible + 1);
+  }
+
+  // ===== Trang đầu + ... =====
+  if(start > 1){
+    html += `<div class="page-btn" onclick="changePage(1)">1</div>`;
+    if(start > 2){
+      html += `<div class="page-btn">...</div>`;
+    }
+  }
+
+  // ===== Các trang chính =====
+  for(let i = start; i <= end; i++){
+    html += `<div class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</div>`;
+  }
+
+  // ===== ... + Trang cuối =====
+  if(end < totalPages){
+    if(end < totalPages - 1){
+      html += `<div class="page-btn">...</div>`;
+    }
+    html += `<div class="page-btn" onclick="changePage(${totalPages})">${totalPages}</div>`;
+  }
+
+  // ===== NEXT =====
+  html += `<div class="page-btn" onclick="changePage(${currentPage + 1})">
+    <i class="ti ti-chevron-right"></i>
+  </div>`;
+
+  document.getElementById("pagination").innerHTML = html;
 }
 
 function changePage(page){
