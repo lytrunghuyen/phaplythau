@@ -922,6 +922,7 @@ font-weight:600;
 .sidebar.collapsed .menu-item:hover::after,
 .sidebar.collapsed .submenu a:hover::after{
   content:attr(data-title);
+  left:65px;
   position:absolute;
   left:65px;
   top:50%;
@@ -939,10 +940,11 @@ font-weight:600;
 }
 
 /* animation */
-.sidebar.collapsed .menu-item::after,
-.sidebar.collapsed .submenu a::after{
-  opacity:0;
-  transition:.2s;
+.sidebar.collapsed .menu-item:hover::after,
+.sidebar.collapsed .submenu a:hover::after{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+  transition-delay:1.5s; /* 👈 DELAY */
 }
 
 .sidebar.collapsed .menu-item:hover::after,
