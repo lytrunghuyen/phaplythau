@@ -922,10 +922,12 @@ font-weight:600;
 .sidebar.collapsed .menu-item:hover::after,
 .sidebar.collapsed .submenu a:hover::after{
   content:attr(data-title);
-  left:65px;
-  position:absolute;
-  left:65px;
-  top:50%;
+  
+  position:fixed; /* 🔥 QUAN TRỌNG */
+  
+  left:80px; /* nằm ngoài sidebar */
+  top:var(--tooltip-top, 50%);
+  
   transform:translateY(-50%);
   
   background:#374151;
@@ -936,20 +938,20 @@ font-weight:600;
   white-space:nowrap;
 
   box-shadow:0 4px 12px rgba(0,0,0,.2);
-  z-index:999;
+  z-index:9999;
 }
 
 /* animation */
-.sidebar.collapsed .menu-item:hover::after,
-.sidebar.collapsed .submenu a:hover::after{
-  opacity:1;
-  transform:translateY(-50%) translateX(0);
-  transition-delay:1.5s; /* 👈 DELAY */
+.sidebar.collapsed .menu-item::after,
+.sidebar.collapsed .submenu a::after{
+  opacity:0;
+  transition:.2s;
 }
 
 .sidebar.collapsed .menu-item:hover::after,
 .sidebar.collapsed .submenu a:hover::after{
   opacity:1;
+  transition-delay:1s;
 }
   
 /* icon file */
@@ -1424,7 +1426,15 @@ else if(iframe.msRequestFullscreen){
 iframe.msRequestFullscreen();
 }
 }
-  
+
+// FIX tooltip position
+document.querySelectorAll('.menu-item, .submenu a').forEach(el=>{
+  el.addEventListener('mouseenter', function(e){
+    const rect = this.getBoundingClientRect();
+    this.style.setProperty('--tooltip-top', rect.top + rect.height/2 + 'px');
+  });
+});
+
 </script>
 <div id="pdfModal" onclick="if(event.target.id==='pdfModal') closePDF()">
 <div class="pdfModalContent">
