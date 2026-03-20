@@ -922,27 +922,18 @@ font-weight:600;
 .sidebar.collapsed .menu-item::after,
 .sidebar.collapsed .submenu a::after{
   content:attr(data-title);
-
   position:fixed;
   left:80px;
   top:var(--tooltip-top);
-
-  transform:translateY(-50%) translateX(-5px);
-
   background:#374151;
   color:#fff;
   padding:6px 10px;
   border-radius:6px;
   font-size:12px;
   white-space:nowrap;
-
-  box-shadow:0 4px 12px rgba(0,0,0,.2);
   z-index:9999;
-
   opacity:0; /* 👈 luôn ẩn mặc định */
   pointer-events:none;
-
-  transition:all .18s ease;
 }
 
 /* 👇 CHỈ hiện khi đã có vị trí */
