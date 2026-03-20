@@ -700,6 +700,7 @@ border-radius:10px;
 .sidebarHeader{
 display:flex;
 align-items:center;
+position:relative; /* 👈 thêm */
 justify-content:space-between;
 margin-bottom:25px;
 }
@@ -858,6 +859,11 @@ font-weight:600;
 /* ===== NÚT TOGGLE ===== */
 
 .toggleBtn{
+  position:absolute;   /* 👈 FIX CỨNG */
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  
   font-size:16px;
   cursor:pointer;
   color:#6b7280;
@@ -871,7 +877,7 @@ font-weight:600;
 
 /* xoay mũi tên */
 .sidebar.collapsed .toggleBtn{
-  transform:rotate(180deg);
+  transform:translateY(-50%) rotate(180deg); /* 👈 giữ vị trí + xoay */
 }
 
 .sidebar.collapsed .menu-item:hover::after{
