@@ -876,9 +876,26 @@ font-weight:600;
   align-items:center;
 }
   
+.sidebar.collapsed .dropdown i:first-child{
+  margin:0;
+  display:block;
+}
+  
+.sidebar.collapsed .dropdown{
+  justify-content:center;
+  padding:12px 0;
+  gap:0;
+}
+  
 /* ẩn submenu */
 .sidebar.collapsed .submenu{
-  margin-left:0;
+  display:block !important;
+  max-height:none !important;
+}
+
+/* Ẩn nút mũi tên cạnh Phân loại khi collapsed */
+.sidebar.collapsed .dropdown .caret{
+  display:none;
 }
 
 /* ===== NÚT TOGGLE ===== */
