@@ -923,8 +923,7 @@ font-weight:600;
   transform:translateY(-50%) rotate(180deg); /* 👈 giữ vị trí + xoay */
 }
 
-/* ===== TOOLTIP COLLAPSED ===== */
-
+/* TOOLTIP collapsed */
 .sidebar.collapsed .menu-item:hover::after,
 .sidebar.collapsed .submenu a:hover::after{
   content:attr(data-title);
@@ -944,11 +943,10 @@ font-weight:600;
   z-index:999;
 }
 
-/* hiệu ứng mượt */
+/* animation */
 .sidebar.collapsed .menu-item::after,
 .sidebar.collapsed .submenu a::after{
   opacity:0;
-  pointer-events:none;
   transition:.2s;
 }
 
