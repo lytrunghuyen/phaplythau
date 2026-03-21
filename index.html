@@ -901,23 +901,21 @@ font-weight:600;
 /* ===== NÚT TOGGLE ===== */
 
 .toggleBtn{
-  position:fixed; /* 👈 đổi absolute → fixed */
-  left:260px;     /* 👈 bám theo sidebar mở */
+  position:absolute;
+  right:10px;
   top:50%;
-  transform:translate(-50%, -50%);
+  transform:translateY(-50%);
   width:36px;
   height:36px;
   display:flex;
   align-items:center;
   justify-content:center;
+  border:1px solid #e5e7eb;
   border-radius:999px;
   background:white;
-  border:1px solid #e5e7eb;
   color:#bbbbbb;
-  font-size:18px;
+  font-size:27px;
   cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-  transition:all .3s cubic-bezier(.4,0,.2,1);
   z-index:200;
 }
 
