@@ -567,11 +567,15 @@ white-space:nowrap;
   font-size:26px;
   color:#9ca3af;
   display:inline-block; /* 👈 QUAN TRỌNG */
+  transition: transform .2s cubic-bezier(.4,0,.2,1), color .2s ease;
+  transform-origin:center;
+  will-change:transform;
 }
 
 /* hover */
 td a:hover .file-doc{
   color:#1E5DFE;
+  transform:scale(1.15);
 }
   
 /* PDF VIEWER */
