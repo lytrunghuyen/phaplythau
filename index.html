@@ -697,9 +697,10 @@ border-radius:10px;
 .sidebarHeader{
 display:flex;
 align-items:center;
-position:relative; /* 👈 thêm */
+position:relative;
 justify-content:space-between;
 margin-bottom:25px;
+padding-right:40px;
 }
   
 @media (max-width:900px){
@@ -899,20 +900,56 @@ font-weight:600;
 /* ===== NÚT TOGGLE ===== */
 
 .toggleBtn{
-  position:absolute;   /* 👈 FIX CỨNG */
-  right:10px;
+  position:absolute;
+  right:0;               /* 👈 sát mép phải */
   top:50%;
   transform:translateY(-50%);
-  
-  font-size:16px;
-  cursor:pointer;
+
+  width:36px;
+  height:36px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:12px;
+
+  background:#f3f4f6;
   color:#6b7280;
-  transition:.3s ease;
+
+  cursor:pointer;
+
+  font-size:18px; /* 👈 to hơn */
+
+  transition:all .25s cubic-bezier(.4,0,.2,1);
 }
 
+/* hover */
 .toggleBtn:hover{
+  background:#e0e7ff;
   color:#1E5DFE;
-  transform:scale(1.1);
+
+  transform:translateY(-50%) scale(1.1);
+
+  box-shadow:0 4px 12px rgba(30,93,254,.25);
+}
+
+/* click (ấn xuống) */
+.toggleBtn:active{
+  transform:translateY(-50%) scale(.95);
+}
+
+/* trạng thái collapsed */
+.sidebar.collapsed .toggleBtn{
+  transform:translateY(-50%) rotate(180deg);
+  background:#1E5DFE;
+  color:white;
+}
+
+/* hover khi collapsed */
+.sidebar.collapsed .toggleBtn:hover{
+  background:#1749c6;
+  box-shadow:0 6px 16px rgba(30,93,254,.35);
 }
 
 /* xoay mũi tên */
