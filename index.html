@@ -902,7 +902,7 @@ font-weight:600;
 
 .toggleBtn{
   position:fixed; /* 👈 đổi absolute → fixed */
-  left:260px;     /* 👈 bám theo sidebar mở */
+  left:232px;     /* 👈 bám theo sidebar mở */
   top:50%;
   transform:translate(-50%, -50%);
   width:36px;
@@ -921,7 +921,7 @@ font-weight:600;
   z-index:200;
 }
 .sidebar.collapsed ~ .toggleBtn{
-  left:78px; /* 👈 đúng width collapsed */
+  left:39px; /* 👈 đúng width collapsed */
 }
   
 /* hover */
@@ -929,14 +929,14 @@ font-weight:600;
   color:#1E5DFE;
   background:#eef2ff;
 
-  transform:translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 
   box-shadow:0 6px 18px rgba(30,93,254,.25);
 }
 
 /* click */
 .toggleBtn:active{
-  transform:translateY(-50%) scale(.95);
+  transform: scale(.95);
 }
 
 /* collapsed → xoay icon */
