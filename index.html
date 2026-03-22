@@ -708,6 +708,7 @@ padding-right:40px;
   .sidebar{
     width:260px; /* giữ nguyên */
     padding:25px;
+    top:0;
   }
 
   .sidebar h2{
@@ -1020,16 +1021,119 @@ font-weight:600;
 .submenu a.active .ti{
   stroke:white;
 }
-  
+/* ===== TOP HEADER ===== */
+.topHeader{
+  position:fixed;
+  top:0;
+  left:260px;
+  width:calc(100% - 260px);
+  height:60px;
+
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 20px;
+  box-sizing:border-box;
+
+  z-index:999;
+
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+
+/* khi sidebar collapse */
+.sidebar.collapsed ~ .topHeader{
+  left:78px;
+  width:calc(100% - 78px);
+}
+
+/* ===== LOGO ===== */
+.logoWrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logoIcon{
+  font-size:22px;
+  color:#1E5DFE;
+}
+
+.logoTitle{
+  font-size:15px;
+  font-weight:600;
+  color:#111827;
+}
+
+.logoSub{
+  font-size:11.5px;
+  color:#6b7280;
+}
+
+/* ===== SEARCH HEADER ===== */
+.headerSearch{
+  position:relative;
+}
+
+.headerSearch i{
+  position:absolute;
+  left:10px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:16px;
+  color:#9ca3af;
+}
+
+.headerSearch input{
+  width:240px;
+  height:34px;
+
+  padding:0 10px 0 32px;
+
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+
+  font-size:13.5px;
+
+  transition:.2s;
+}
+
+.headerSearch input:focus{
+  outline:none;
+  border-color:#1E5DFE;
+  box-shadow:0 0 0 2px rgba(30,93,254,.1);
+}
+
+/* ===== ĐẨY CONTENT XUỐNG ===== */
+.content{
+  margin-top:60px; /* 👈 QUAN TRỌNG */
+}  
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-<div class="sidebarHeader">
-  <h2 class="sidebarTitle">📚 Pháp lý đấu thầu</h2>
-</div>
+<header class="topHeader">
+  <div class="header-left">
+    <div class="logoWrap">
+      <i class="ti ti-scale logoIcon"></i>
+      <div class="logoText">
+        <div class="logoTitle">Thư viện pháp lý</div>
+        <div class="logoSub">Đấu thầu & Dược</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="headerSearch">
+      <i class="ti ti-search"></i>
+      <input type="text" placeholder="Tìm nhanh văn bản...">
+    </div>
+  </div>
+</header>
 <!-- Tổng hợp -->
 
 <div class="menu-item active" data-title="Tổng hợp" onclick="setActive(this);filterDocs('all')">
